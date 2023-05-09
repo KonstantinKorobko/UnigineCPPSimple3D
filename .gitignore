@@ -30,3 +30,16 @@
 *.exe
 *.out
 *.app
+
+simple_interaction/.thumbnails
+simple_interaction/bin
+simple_interaction/data
+data/configs
+simple_interaction/include
+simple_interaction/lib
+simple_interaction/source/.vs
+simple_interaction/source/x64
+simple_interaction/utils
+simple_interaction/launch_debug.bat
+simple_interaction/launch_editor.bat
+simple_interaction/launch_release.bat
