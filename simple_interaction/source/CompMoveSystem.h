@@ -15,6 +15,7 @@ public:
 	//container node id
 	PROP_PARAM(Int, aggregateId, 0);
 	PROP_PARAM(Float, speed, 0.0);
+	PROP_PARAM(Vec3, setpoint, Math::vec3(0.0));
 
 protected:
 	void init();

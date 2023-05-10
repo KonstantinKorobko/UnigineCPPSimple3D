@@ -104,6 +104,10 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	ptrCompControlSystem->vehicleId = ptrVehicle->getID();
 	ptrCompControlSystem->vehicleType = vehicle_type;
 
+	CompRotateSystem* ptrCompRotateSystemVehicle = ComponentSystem::get()->addComponent<CompRotateSystem>(ptrVehicle);
+	ptrCompRotateSystemVehicle->aggregateId = ptrVehicle->getID();
+	ptrCompRotateSystemVehicle->torque = torqueVehicle;
+
 	CompMoveSystem* ptrCompMoveSystem = ComponentSystem::get()->addComponent<CompMoveSystem>(ptrVehicle);
 	ptrCompMoveSystem->aggregateId = ptrVehicle->getID();
 	ptrCompMoveSystem->speed = speed;
@@ -116,10 +120,6 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	{
 		ptrCompNavigationSystem->addYField(ref_global_radar.getPlayerId());
 	}
-
-	CompRotateSystem* ptrCompRotateSystemVehicle = ComponentSystem::get()->addComponent<CompRotateSystem>(ptrVehicle);
-	ptrCompRotateSystemVehicle->aggregateId = ptrVehicle->getID();
-	ptrCompRotateSystemVehicle->torque = torqueVehicle;
 
 	CompDamageSystem* ptrCompDamageSystem = ComponentSystem::get()->addComponent<CompDamageSystem>(ptrTurret);
 	ptrCompDamageSystem->aggregateId = ptrTurret->getID();

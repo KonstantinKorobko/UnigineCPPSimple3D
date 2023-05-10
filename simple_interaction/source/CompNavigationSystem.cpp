@@ -60,6 +60,7 @@ void CompNavigationSystem::addYField(int player_node_id)
 void CompNavigationSystem::init()
 {
 	ptrAggregate = World::getNodeByID(aggregateId);
+	ptrCompMoveSystem = ComponentSystem::get()->addComponent<CompMoveSystem>(ptrAggregate);
 
 	Math::Random rand;
 	seed = rand.getSeed();
@@ -76,7 +77,7 @@ Math::vec3 CompNavigationSystem::getCheckPoint()
 	seed++;
 	checkPoint.z = 0.0;
 
-	return checkPoint + spawnPoint.get();
+	ptrCompMoveSystem->setpoint = checkPoint + spawnPoint.get();
 }
 
 void CompNavigationSystem::update()

@@ -1,5 +1,6 @@
 #pragma once
 #include <UnigineComponentSystem.h>
+#include "CompMoveSystem.h"
 #include <random>
 
 using namespace Unigine;
@@ -24,7 +25,7 @@ public:
 
 	//In this method node register in 2-sided list sorted with Y-axis for easy interection on space.
 	void addYField(int player_node_id);
-	Math::vec3 getCheckPoint();
+	void setPatrolPoint(int radius);
 
 protected:
 	void init();
@@ -33,6 +34,7 @@ protected:
 
 private:
 	NodePtr ptrAggregate;
+	CompMoveSystem* ptrCompMoveSystem;
 
 	unsigned int seed;
 	std::mt19937 random;
