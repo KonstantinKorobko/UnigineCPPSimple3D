@@ -40,6 +40,8 @@ int AppWorldLogic::init()
 	{
 		VehicleFactory::constructVehicle(VehicleFactory::T_VEHICLE_PLAYER, objGlobalRadar);
 	}
+
+	spawnVehicle();
 	// Write here code to be called on world initialization: initialize resources for your world scene during the world start.
 	return 1;
 }
@@ -107,7 +109,7 @@ void AppWorldLogic::spawnVehicle()
 	std::mt19937 random;
 	random.seed(seed);
 	std::uniform_real_distribution<> chanceRange(0.0, 1.0);
-	std::uniform_real_distribution<> spawnRange(-100.0, 100.0);
+	std::uniform_real_distribution<> spawnRange(-20.0, 20.0);
 	int type = VehicleFactory::T_VEHICLE_LIGHT;
 
 	for (int i = 0; i < 10; i++)

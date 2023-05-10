@@ -88,11 +88,11 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	NodePtr ptrTurret = createTurret(sizeTurret);
 	ptrVehicle->addChild(ptrTurret);
 
-	sizeHull.x = sizeHull.y = 0;
-	sizeHull.z *= 0.5;
-	sizeHull.z += sizeTurret.z * 0.5 + 0.005;
-	ptrVehicle->setWorldPosition(sizeHull);
-	ptrTurret->setPosition(sizeHull);
+	Math::vec3 turretPos = Math::vec3(0.0, 0.0, sizeHull.z * 0.5 + sizeTurret.z * 0.5 + 0.005);
+	ptrTurret->setPosition(turretPos);
+
+	Math::vec3 vehiclePos = Math::vec3(ref_global_radar.getSpawnPosX(), ref_global_radar.getSpawnPosY(), sizeHull.z * 0.5 + 0.05);
+	ptrVehicle->setWorldPosition(vehiclePos);
 
 	//create and connect aggregates control components
 	CompControlSystem* ptrCompControlSystem = ComponentSystem::get()->addComponent<CompControlSystem>(ptrVehicle);
@@ -193,4 +193,20 @@ int GlobalRadar::getPlayerId()
 void GlobalRadar::setPlayerId(int node_id)
 {
 	playerId = node_id;
+}
+
+void GlobalRadar::setSpawnPos(float pos_x, float pos_y)
+{
+	spawnPosX = pos_x;
+	spawnPosY = pos_y;
+}
+
+float GlobalRadar::getSpawnPosX()
+{
+	return spawnPosX;
+}
+
+float GlobalRadar::getSpawnPosY()
+{
+	return spawnPosY;
 }

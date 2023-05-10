@@ -1,4 +1,5 @@
 #pragma once
+#include <random>
 #include <UnigineNodes.h>
 #include <UnigineVisualizer.h>
 #include <UnigineConsole.h>
@@ -13,8 +14,14 @@ public:
 
 	int getPlayerId();
 	void setPlayerId(int node_id);
+	void setSpawnPos(float pos_x, float pos_y);
+	float getSpawnPosX();
+	float getSpawnPosY();
+
 private:
 	int playerId;
+	float spawnPosX;
+	float spawnPosY;
 };
 
 class VehicleFactory
