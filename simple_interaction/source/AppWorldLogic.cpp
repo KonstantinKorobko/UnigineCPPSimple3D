@@ -99,3 +99,33 @@ int AppWorldLogic::restore(const Unigine::StreamPtr& stream)
 	UNIGINE_UNUSED(stream);
 	return 1;
 }
+
+void AppWorldLogic::spawnVehicle()
+{
+	Math::Random rand;
+	unsigned int seed = rand.getSeed();
+	std::mt19937 random;
+	random.seed(seed);
+	std::uniform_real_distribution<> chanceRange(0.0, 1.0);
+	std::uniform_real_distribution<> spawnRange(-100.0, 100.0);
+	int type = VehicleFactory::T_VEHICLE_LIGHT;
+
+	for (int i = 0; i < 10; i++)
+	{
+		float chance = chanceRange(random);		
+		if (chance >= 0.90)
+		{
+			type = VehicleFactory::T_VEHICLE_HARD;
+		}
+		else if (chance >= 0.60)
+		{
+			type = VehicleFactory::T_VEHICLE_MIDDLE;
+		}
+
+		float posX = spawnRange(random);
+		float posY = spawnRange(random);
+		objGlobalRadar.setSpawnPos(posX, posY);
+
+		VehicleFactory::constructVehicle(type, objGlobalRadar);
+	}
+}

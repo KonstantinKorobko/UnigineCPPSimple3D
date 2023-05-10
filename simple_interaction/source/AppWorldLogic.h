@@ -42,6 +42,7 @@ public:
 
 private:
 	GlobalRadar objGlobalRadar;
+	void spawnVehicle();
 };
 
 #endif // __APP_WORLD_LOGIC_H__
