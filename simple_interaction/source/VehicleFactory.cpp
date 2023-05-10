@@ -11,7 +11,7 @@
 void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_radar)
 {
 	NodeDummyPtr ptrVehicle = NodeDummy::create();
-	ptrVehicle->setSaveToWorldEnabled(false);
+	ptrVehicle->setSaveToWorldEnabled(true);
 	ptrVehicle->setShowInEditorEnabled(true);
 
 	//Parametrise vehicle. 
