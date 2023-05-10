@@ -11,9 +11,9 @@
 void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_radar)
 {
 	NodeDummyPtr ptrVehicle = NodeDummy::create();
-	ptrVehicle->setSaveToWorldEnabled(true);
-
+	ptrVehicle->setSaveToWorldEnabled(false);
 	ptrVehicle->setShowInEditorEnabled(true);
+
 	//Parametrise vehicle. 
 	float armor = 0.0;
 	float power = 0.0;
@@ -179,6 +179,8 @@ NodePtr VehicleFactory::createTurret(Math::vec3 turret_size)
 GlobalRadar::GlobalRadar()
 {
 	playerId = 0;
+	spawnPosX = 0.0;
+	spawnPosY = 0.0;
 }
 
 GlobalRadar::~GlobalRadar()

@@ -56,6 +56,7 @@ int AppWorldLogic::update()
 	{
 		VehicleFactory::constructVehicle(3, objGlobalRadar);
 	}
+	//World saving just for debuging in redactor. Vehicles should be delated manually in redactor.
 	if ((Input::isKeyPressed(Input::KEY_ANY_CTRL)) && (Input::isKeyUp(Input::KEY_S)))
 	{
 		World::saveWorld();
