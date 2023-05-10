@@ -1,5 +1,4 @@
 #pragma once
-#include <random>
 #include <UnigineNodes.h>
 #include <UnigineVisualizer.h>
 #include <UnigineConsole.h>
@@ -28,14 +27,6 @@ public:
 		T_VEHICLE_MIDDLE,
 		T_VEHICLE_HARD
 	};
-
-	/*enum VehicleParameter
-	{
-		P_VEHICLE_TYPE,
-		P_VEHICLE_ARMOR,
-		P_VEHICLE_POWER,
-		P_VEHICLE_SPEED
-	};*/
 
 	static void constructVehicle(int vehicle_type, GlobalRadar& ref_radar);
 private:
