@@ -3,57 +3,55 @@ REGISTER_COMPONENT(CompNavigationSystem);
 
 void CompNavigationSystem::addYField(int player_node_id)
 {
-	NodePtr ptrSelf = World::getNodeByID(aggregateId);
 	NodePtr ptrPlayer = World::getNodeByID(player_node_id);
 
-	float yAxisSelf = ptrSelf->getWorldPosition().y;
-	float yAxisVehicle = ptrPlayer->getWorldPosition().y;
+	float ySelf = World::getNodeByID(aggregateId)->getWorldPosition().y;
+	float yNext = ptrPlayer->getWorldPosition().y;
 
-	CompNavigationSystem* ptrYAxisVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrPlayer);
-	NodePtr ptrYAxisVehicle = nullptr;
-	NodePtr ptrYAxisNextVehicle = ptrPlayer;
+	CompNavigationSystem* ptrNextNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrPlayer);
+	NodePtr ptrNext = nullptr;
+	NodePtr ptrCheck = ptrPlayer;
 
-	while ((yAxisSelf < yAxisVehicle) && (ptrYAxisNextVehicle.get() != NULL))
+	while ((ySelf < yNext) && (ptrCheck.get() != NULL))
 	{
-		ptrYAxisVehicle = ptrYAxisNextVehicle;
-		yAxisVehicle = ptrYAxisVehicle->getWorldPosition().y;
-		ptrYAxisVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrYAxisVehicle);
-		ptrYAxisNextVehicle = World::getNodeByID(ptrYAxisVehicleNavSys->leftYAxis);
+		ptrNext = ptrCheck;
+		yNext = ptrNext->getWorldPosition().y;
+		ptrNextNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrNext);
+		ptrCheck = World::getNodeByID(ptrNextNavSys->leftYAxis);
 	}
 
-	if (ptrYAxisVehicle == ptrPlayer)
+	ptrCheck = ptrPlayer;
+	while ((ySelf > yNext) && (ptrCheck.get() != NULL))
 	{
-		ptrYAxisNextVehicle = ptrPlayer;
-		while ((yAxisSelf > yAxisVehicle) && (ptrYAxisNextVehicle.get() != NULL))
-		{
-			ptrYAxisVehicle = ptrYAxisNextVehicle;
-			yAxisVehicle = ptrYAxisVehicle->getWorldPosition().y;
-			ptrYAxisVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrYAxisVehicle);
-			ptrYAxisNextVehicle = World::getNodeByID(ptrYAxisVehicleNavSys->rightYAxis);
-		}
+		ptrNext = ptrCheck;
+		yNext = ptrNext->getWorldPosition().y;
+		ptrNextNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrNext);
+		ptrCheck = World::getNodeByID(ptrNextNavSys->rightYAxis);
 	}
 
-	if (yAxisSelf <= yAxisVehicle)
+	if (ySelf <= yNext)
 	{
-		NodePtr ptrLeftVehicle = World::getNodeByID(ptrYAxisVehicleNavSys->leftYAxis);
+		NodePtr ptrLeftVehicle = World::getNodeByID(ptrNextNavSys->leftYAxis);
 		if (ptrLeftVehicle.get() != NULL)
 		{
 			CompNavigationSystem* ptrLeftVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrLeftVehicle);
 			ptrLeftVehicleNavSys->rightYAxis = aggregateId;
-			rightYAxis = ptrLeftVehicleNavSys->aggregateId;
+			leftYAxis = ptrLeftVehicleNavSys->aggregateId;
 		}
-		ptrYAxisVehicleNavSys->leftYAxis = aggregateId;
+		ptrNextNavSys->leftYAxis = aggregateId;
+		rightYAxis = ptrNextNavSys->aggregateId;
 	}
 	else
 	{
-		NodePtr ptrRightVehicle = World::getNodeByID(ptrYAxisVehicleNavSys->rightYAxis);
+		NodePtr ptrRightVehicle = World::getNodeByID(ptrNextNavSys->rightYAxis);
 		if (ptrRightVehicle.get() != NULL)
 		{
 			CompNavigationSystem* ptrRightVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrRightVehicle);
 			ptrRightVehicleNavSys->rightYAxis = aggregateId;
-			leftYAxis = ptrRightVehicleNavSys->aggregateId;
+			rightYAxis = ptrRightVehicleNavSys->aggregateId;
 		}
-		ptrYAxisVehicleNavSys->rightYAxis = aggregateId;
+		ptrNextNavSys->rightYAxis = aggregateId;
+		leftYAxis = ptrNextNavSys->aggregateId;
 	}
 }
 
@@ -64,7 +62,12 @@ void CompNavigationSystem::init()
 
 void CompNavigationSystem::update()
 {
-
+	//visualize list of vihicles 
+	NodePtr ptrNextVehicle = World::getNodeByID(leftYAxis);
+	if (ptrNextVehicle.get() != NULL)
+	{
+		Visualizer::renderLine3D(ptrAggregate->getWorldPosition(), ptrNextVehicle->getWorldPosition(), Math::vec4(0.0, 1.0, 0.0, 1.0));
+	}
 }
 
 void CompNavigationSystem::shutdown()

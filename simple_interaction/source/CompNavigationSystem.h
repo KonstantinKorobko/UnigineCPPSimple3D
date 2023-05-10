@@ -1,5 +1,6 @@
 #pragma once
 #include <UnigineComponentSystem.h>
+#include <UnigineVisualizer.h>
 using namespace Unigine;
 
 class CompNavigationSystem :

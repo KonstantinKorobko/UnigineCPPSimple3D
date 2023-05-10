@@ -8,8 +8,8 @@ void CompMoveSystem::init()
 
 void CompMoveSystem::update()
 {
-	Math::vec3 pos = ptrAggregate->getWorldPosition();
-	ptrAggregate->translate(Math::vec3(0.0, 0.001 * speed, 0.0));
+	//Math::vec3 pos = ptrAggregate->getWorldPosition();
+	//ptrAggregate->translate(Math::vec3(0.0, 0.001 * speed, 0.0));
 }
 
 void CompMoveSystem::shutdown()
