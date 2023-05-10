@@ -14,8 +14,10 @@ public:
 
 	//container node id
 	PROP_PARAM(Int, aggregateId, 0);
-	PROP_PARAM(Int, leftTargetId, 0);
-	PROP_PARAM(Int, rightTargetId, 0);
+	PROP_PARAM(Int, leftYAxis, 0);
+	PROP_PARAM(Int, rightYAxis, 0);
+
+	void addYField(int player_node_id);
 
 protected:
 	void init();
