@@ -15,9 +15,6 @@ public:
 	//container node id
 	PROP_PARAM(Int, vehicleId, 0);
 	PROP_PARAM(Int, vehicleType, 0);
-	//PROP_PARAM(Float, armor, 0.0);
-	//PROP_PARAM(Float, power, 0.0);
-	//PROP_PARAM(Float, speed, 0.0);
 
 protected:
 	void init();
