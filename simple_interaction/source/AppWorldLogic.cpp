@@ -29,9 +29,9 @@ int AppWorldLogic::init()
 
 	Unigine::Console::setOnscreen(true);
 	Unigine::Console::setFontSize(20);
-	Unigine::Console::setMessageColor(Unigine::Math::vec4(0, 256, 0, 256));
-	Unigine::Console::setWarningColor(Unigine::Math::vec4(0, 0, 256, 256));
-	Unigine::Console::setErrorColor(Unigine::Math::vec4(256, 0, 0, 256));
+	Unigine::Console::setMessageColor(Unigine::Math::vec4(0, 1, 0, 1));
+	Unigine::Console::setWarningColor(Unigine::Math::vec4(0, 0, 1, 1));
+	Unigine::Console::setErrorColor(Unigine::Math::vec4(1, 0, 0, 1));
 
 	Unigine::ComponentSystem::get()->initialize();
 
