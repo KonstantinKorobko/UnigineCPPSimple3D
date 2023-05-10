@@ -97,21 +97,28 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	//create and connect aggregates control components
 	CompControlSystem* ptrCompControlSystem = ComponentSystem::get()->addComponent<CompControlSystem>(ptrVehicle);
 	ptrCompControlSystem->vehicleId = ptrVehicle->getID();
-	ptrCompControlSystem->vehicleType = vehicle_type;	
-	
+	ptrCompControlSystem->vehicleType = vehicle_type;
+
 	CompMoveSystem* ptrCompMoveSystem = ComponentSystem::get()->addComponent<CompMoveSystem>(ptrVehicle);
 	ptrCompMoveSystem->aggregateId = ptrVehicle->getID();
 	ptrCompMoveSystem->speed = speed;
 
+	CompNavigationSystem* ptrCompNavigationSystem = ComponentSystem::get()->addComponent<CompNavigationSystem>(ptrVehicle);
+	ptrCompNavigationSystem->aggregateId = ptrVehicle->getID();
+	if (vehicle_type != T_VEHICLE_PLAYER)
+	{
+		ptrCompNavigationSystem->addYField(ref_global_radar.getPlayerId());
+	}
+
 	CompRotateSystem* ptrCompRotateSystemVehicle = ComponentSystem::get()->addComponent<CompRotateSystem>(ptrVehicle);
 	ptrCompRotateSystemVehicle->aggregateId = ptrVehicle->getID();
 	ptrCompRotateSystemVehicle->torque = torqueVehicle;
-	
+
 	CompDamageSystem* ptrCompDamageSystem = ComponentSystem::get()->addComponent<CompDamageSystem>(ptrTurret);
 	ptrCompDamageSystem->aggregateId = ptrTurret->getID();
 	ptrCompDamageSystem->armor = armor;
 	ptrCompDamageSystem->power = power;
-	
+
 	CompRotateSystem* ptrCompRotateSystemTurret = ComponentSystem::get()->addComponent<CompRotateSystem>(ptrTurret);
 	ptrCompRotateSystemTurret->aggregateId = ptrTurret->getID();
 	ptrCompRotateSystemTurret->torque = torqueTurret;

@@ -10,16 +10,50 @@ void CompNavigationSystem::addYField(int player_node_id)
 	float yAxisVehicle = ptrPlayer->getWorldPosition().y;
 
 	CompNavigationSystem* ptrYAxisVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrPlayer);
-	NodePtr ptrYAxisVehicle;
+	NodePtr ptrYAxisVehicle = nullptr;
+	NodePtr ptrYAxisNextVehicle = ptrPlayer;
+
+	while ((yAxisSelf < yAxisVehicle) && (ptrYAxisNextVehicle.get() != NULL))
+	{
+		ptrYAxisVehicle = ptrYAxisNextVehicle;
+		yAxisVehicle = ptrYAxisVehicle->getWorldPosition().y;
+		ptrYAxisVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrYAxisVehicle);
+		ptrYAxisNextVehicle = World::getNodeByID(ptrYAxisVehicleNavSys->leftYAxis);
+	}
+
+	if (ptrYAxisVehicle == ptrPlayer)
+	{
+		ptrYAxisNextVehicle = ptrPlayer;
+		while ((yAxisSelf > yAxisVehicle) && (ptrYAxisNextVehicle.get() != NULL))
+		{
+			ptrYAxisVehicle = ptrYAxisNextVehicle;
+			yAxisVehicle = ptrYAxisVehicle->getWorldPosition().y;
+			ptrYAxisVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrYAxisVehicle);
+			ptrYAxisNextVehicle = World::getNodeByID(ptrYAxisVehicleNavSys->rightYAxis);
+		}
+	}
+
 	if (yAxisSelf <= yAxisVehicle)
 	{
-		ptrYAxisVehicle = World::getNodeByID(ptrYAxisVehicleNavSys->leftYAxis);
-		yAxisVehicle = ptrYAxisVehicle->getWorldPosition().y;
+		NodePtr ptrLeftVehicle = World::getNodeByID(ptrYAxisVehicleNavSys->leftYAxis);
+		if (ptrLeftVehicle.get() != NULL)
+		{
+			CompNavigationSystem* ptrLeftVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrLeftVehicle);
+			ptrLeftVehicleNavSys->rightYAxis = aggregateId;
+			rightYAxis = ptrLeftVehicleNavSys->aggregateId;
+		}
+		ptrYAxisVehicleNavSys->leftYAxis = aggregateId;
 	}
 	else
 	{
-		ptrYAxisVehicle = World::getNodeByID(ptrYAxisVehicleNavSys->rightYAxis);
-		yAxisVehicle = ptrYAxisVehicle->getWorldPosition().y;
+		NodePtr ptrRightVehicle = World::getNodeByID(ptrYAxisVehicleNavSys->rightYAxis);
+		if (ptrRightVehicle.get() != NULL)
+		{
+			CompNavigationSystem* ptrRightVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrRightVehicle);
+			ptrRightVehicleNavSys->rightYAxis = aggregateId;
+			leftYAxis = ptrRightVehicleNavSys->aggregateId;
+		}
+		ptrYAxisVehicleNavSys->rightYAxis = aggregateId;
 	}
 }
 
@@ -30,6 +64,7 @@ void CompNavigationSystem::init()
 
 void CompNavigationSystem::update()
 {
+
 }
 
 void CompNavigationSystem::shutdown()
