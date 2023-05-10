@@ -1,3 +1,5 @@
+#include <UnigineGame.h>
+#include <UnigineVisualizer.h>
 #include "CompNavigationSystem.h"
 REGISTER_COMPONENT(CompNavigationSystem);
 
@@ -58,10 +60,32 @@ void CompNavigationSystem::addYField(int player_node_id)
 void CompNavigationSystem::init()
 {
 	ptrAggregate = World::getNodeByID(aggregateId);
+
+	Math::Random rand;
+	seed = rand.getSeed();
+	random.seed(seed);
+}
+
+Math::vec3 CompNavigationSystem::getCheckPoint()
+{
+	std::uniform_real_distribution<> checkRange(-1.0, 1.0);
+	Math::vec3 checkPoint;
+	checkPoint.x = checkRange(random) * 10.0;
+	seed++;
+	checkPoint.y = checkRange(random) * 10.0;
+	seed++;
+	checkPoint.z = 0.0;
+
+	return checkPoint + spawnPoint.get();
 }
 
 void CompNavigationSystem::update()
 {
+	t500 = t500 - Game::getIFps();
+	if (t500 <= 0.0)
+	{
+		t500 = 500.0;
+	}
 	//visualize list of vihicles 
 	NodePtr ptrNextVehicle = World::getNodeByID(leftYAxis);
 	if (ptrNextVehicle.get() != NULL)

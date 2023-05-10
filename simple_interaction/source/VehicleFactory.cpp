@@ -111,6 +111,7 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	CompNavigationSystem* ptrCompNavigationSystem = ComponentSystem::get()->addComponent<CompNavigationSystem>(ptrVehicle);
 	ptrCompNavigationSystem->aggregateId = ptrVehicle->getID();
 	ptrCompNavigationSystem->radarRadius = radarRadius;
+	ptrCompNavigationSystem->spawnPoint = vehiclePos;
 	if (vehicle_type != T_VEHICLE_PLAYER)
 	{
 		ptrCompNavigationSystem->addYField(ref_global_radar.getPlayerId());
