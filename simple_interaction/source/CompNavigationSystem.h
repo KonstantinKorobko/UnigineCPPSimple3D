@@ -17,6 +17,7 @@ public:
 	PROP_PARAM(Int, aggregateId, 0);
 	PROP_PARAM(Int, leftYAxis, 0);
 	PROP_PARAM(Int, rightYAxis, 0);
+	PROP_PARAM(Float, radarRadius, 0);
 
 	//In this method node register in 2-sided list sorted with Y-axis for easy interection on space.
 	void addYField(int player_node_id);

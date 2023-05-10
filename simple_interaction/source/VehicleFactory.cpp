@@ -20,6 +20,7 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	float speed = 0.0;
 	float torqueVehicle = 0.0;
 	float torqueTurret = 0.0;
+	float radarRadius = 0.0;
 	Math::vec3 sizeHull;
 	Math::vec3 sizeTurret;
 
@@ -34,6 +35,7 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 		speed = 2.0;
 		torqueVehicle = 2.0;
 		torqueTurret = 2.0;
+		radarRadius = 20.0;
 
 		sizeHull = Math::vec3(0.4, 0.6, 0.2);
 		sizeTurret = Math::vec3(0.1, 0.7, 0.05);
@@ -47,6 +49,7 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 		speed = 2.0;
 		torqueVehicle = 2.0;
 		torqueTurret = 2.0;
+		radarRadius = 4.0;
 
 		sizeHull = Math::vec3(0.2, 0.3, 0.1);
 		sizeTurret = Math::vec3(0.07, 0.2, 0.04);
@@ -60,6 +63,7 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 		speed = 1.5;
 		torqueVehicle = 1.5;
 		torqueTurret = 1.5;
+		radarRadius = 5.0;
 
 		sizeHull = Math::vec3(0.3, 0.4, 0.15);
 		sizeTurret = Math::vec3(0.1, 0.35, 0.06);
@@ -73,6 +77,7 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 		speed = 1.0;
 		torqueVehicle = 1.0;
 		torqueTurret = 1.0;
+		radarRadius = 6.0;
 
 		sizeHull = Math::vec3(0.4, 0.5, 0.2);
 		sizeTurret = Math::vec3(0.17, 0.4, 0.08);
@@ -105,6 +110,7 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 
 	CompNavigationSystem* ptrCompNavigationSystem = ComponentSystem::get()->addComponent<CompNavigationSystem>(ptrVehicle);
 	ptrCompNavigationSystem->aggregateId = ptrVehicle->getID();
+	ptrCompNavigationSystem->radarRadius = radarRadius;
 	if (vehicle_type != T_VEHICLE_PLAYER)
 	{
 		ptrCompNavigationSystem->addYField(ref_global_radar.getPlayerId());
