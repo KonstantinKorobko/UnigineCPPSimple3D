@@ -8,6 +8,8 @@ REGISTER_COMPONENT(CompRotateSystem);
 void CompRotateSystem::init()
 {
 	ptrAggregate = World::getNodeByID(aggregateId);
+
+	stateLast = stateCurrent = 0;
 }
 
 void CompRotateSystem::update()
@@ -32,14 +34,28 @@ float CompRotateSystem::calcTorque()
 {
 	Math::mat3 sRotationMat = ptrAggregate->getRotation().getMat3();
 
-	if ((sRotationMat[4] * rotateVec.get().y) - (sRotationMat[5] * rotateVec.get().x) < 0)
+	difference = sRotationMat[4] * rotateVec.get().y - sRotationMat[5] * rotateVec.get().x;
+
+	if (difference > 0)
 	{
-		return -/*0.2 * */torque;
+		stateCurrent = 1;
+	}
+	else if (difference < 0)
+	{
+		stateCurrent = -1;
+	}
+	if ((stateLast == 0) || (stateLast == stateCurrent))
+	{
+		stateLast = stateCurrent;
+		return stateCurrent * torque;
 	}
 	else
 	{
-		return /*0.2 * */torque;
-	}
+		//stateLast = stateCurrent = 0;
+		rotateVec = Math::vec3(0.0);
+
+		return 0.0f;
+	}	
 
 	return 0.0f;
 }

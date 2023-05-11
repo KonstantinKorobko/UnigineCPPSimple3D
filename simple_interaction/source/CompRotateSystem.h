@@ -29,5 +29,8 @@ private:
 	NodePtr ptrAggregate;
 
 	float calcTorque();
+	float difference;
+	int stateCurrent;
+	int stateLast;
 };
 

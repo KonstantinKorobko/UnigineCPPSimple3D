@@ -35,7 +35,7 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 
 		armor = 100.0;
 		power = 5.0;
-		speed = 2.0;
+		speed = 0.02;
 		torqueVehicle = 2.0;
 		torqueTurret = 2.0;
 		radarRadius = 20.0;
@@ -49,7 +49,7 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	{
 		armor = 10.0;
 		power = 1.0;
-		speed = 2.0;
+		speed = 0.02;
 		torqueVehicle = 2.0;
 		torqueTurret = 2.0;
 		radarRadius = 4.0;
@@ -63,7 +63,7 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	{
 		armor = 20.0;
 		power = 2.0;
-		speed = 1.5;
+		speed = 0.015;
 		torqueVehicle = 1.5;
 		torqueTurret = 1.5;
 		radarRadius = 5.0;
@@ -77,7 +77,7 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	{
 		armor = 30.0;
 		power = 3.0;
-		speed = 1.0;
+		speed = 0.01;
 		torqueVehicle = 1.0;
 		torqueTurret = 1.0;
 		radarRadius = 6.0;
