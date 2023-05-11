@@ -13,9 +13,13 @@ void CompMoveSystem::update()
 {
 	Math::vec3 rotVec = getRotationVec();
 
-	if (rotVec.z >= 0.01)
+	if (rotVec.z >= 0.001)
 	{
 		ptrCompRotateSystem->rotateVec = rotVec;
+	}
+	else
+	{
+		setpoint = Math::vec3(0.0);
 	}
 	//Math::vec3 posCurrent = ptrAggregate->getWorldPosition();
 	//Math::vec3 posSet = setpoint;
