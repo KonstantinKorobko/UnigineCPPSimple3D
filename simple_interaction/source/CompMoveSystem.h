@@ -1,5 +1,6 @@
 #pragma once
 #include <UnigineComponentSystem.h>
+#include "CompRotateSystem.h"
 using namespace Unigine;
 
 class CompMoveSystem :
@@ -23,5 +24,9 @@ protected:
 	void shutdown();
 private:
 	NodePtr ptrAggregate;
+
+	Math::vec3 getRotationVec();
+
+	CompRotateSystem* ptrCompRotateSystem;
 };
 

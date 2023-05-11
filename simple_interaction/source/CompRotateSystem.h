@@ -15,8 +15,11 @@ public:
 	//container node id
 	PROP_PARAM(Int, aggregateId, 0);
 	PROP_PARAM(Float, torque, 0.0);
+	PROP_PARAM(Vec3, rotateVec, Math::vec3(0.0));
 
 protected:
+	NodePtr ptrAggregate;
+
 	void init();
 	void update();
 	void shutdown();
