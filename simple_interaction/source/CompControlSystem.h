@@ -1,5 +1,6 @@
 #pragma once
 #include <UnigineComponentSystem.h>
+#include "CompNavigationSystem.h"
 using namespace Unigine;
 
 class CompControlSystem :
@@ -13,12 +14,17 @@ public:
 	COMPONENT_SHUTDOWN(shutdown);
 
 	//container node id
-	PROP_PARAM(Int, vehicleId, 0);
+	PROP_PARAM(Int, aggregateId, 0);
 	PROP_PARAM(Int, vehicleType, 0);
+	PROP_PARAM(Float, t5, 0);
 
 protected:
+	NodePtr ptrAggregate;
+
 	void init();
 	void update();
 	void shutdown();
+
+	CompNavigationSystem* ptrCompNavigationSystem;
 };
 

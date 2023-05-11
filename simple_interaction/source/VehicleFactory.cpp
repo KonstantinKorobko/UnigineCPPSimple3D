@@ -100,10 +100,6 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	ptrVehicle->setWorldPosition(vehiclePos);
 
 	//create and connect aggregates control components
-	CompControlSystem* ptrCompControlSystem = ComponentSystem::get()->addComponent<CompControlSystem>(ptrVehicle);
-	ptrCompControlSystem->vehicleId = ptrVehicle->getID();
-	ptrCompControlSystem->vehicleType = vehicle_type;
-
 	CompRotateSystem* ptrCompRotateSystemVehicle = ComponentSystem::get()->addComponent<CompRotateSystem>(ptrVehicle);
 	ptrCompRotateSystemVehicle->aggregateId = ptrVehicle->getID();
 	ptrCompRotateSystemVehicle->torque = torqueVehicle;
@@ -129,6 +125,10 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	CompRotateSystem* ptrCompRotateSystemTurret = ComponentSystem::get()->addComponent<CompRotateSystem>(ptrTurret);
 	ptrCompRotateSystemTurret->aggregateId = ptrTurret->getID();
 	ptrCompRotateSystemTurret->torque = torqueTurret;
+
+	CompControlSystem* ptrCompControlSystem = ComponentSystem::get()->addComponent<CompControlSystem>(ptrVehicle);
+	ptrCompControlSystem->aggregateId = ptrVehicle->getID();
+	ptrCompControlSystem->vehicleType = vehicle_type;
 }
 
 NodePtr VehicleFactory::createHull(Math::vec3 hull_size)
