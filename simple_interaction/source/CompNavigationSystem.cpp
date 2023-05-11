@@ -9,54 +9,21 @@ REGISTER_COMPONENT(CompNavigationSystem);
 void CompNavigationSystem::addYField(int player_node_id)
 {
 	NodePtr ptrPlayer = World::getNodeByID(player_node_id);
+	CompNavigationSystem* ptrPlayerNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrPlayer);
 
-	float ySelf = World::getNodeByID(aggregateId)->getWorldPosition().y;
-	float yNext = ptrPlayer->getWorldPosition().y;
-
-	CompNavigationSystem* ptrNextNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrPlayer);
-	NodePtr ptrNext = nullptr;
-	NodePtr ptrCheck = ptrPlayer;
-
-	while ((ySelf < yNext) && (ptrCheck.get() != NULL))
+	NodePtr ptrRight = World::getNodeByID(ptrPlayerNavSys->rightYAxis);
+	if (ptrRight.get() != NULL)
 	{
-		ptrNext = ptrCheck;
-		yNext = ptrNext->getWorldPosition().y;
-		ptrNextNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrNext);
-		ptrCheck = World::getNodeByID(ptrNextNavSys->leftYAxis);
-	}
-
-	ptrCheck = ptrPlayer;
-	while ((ySelf > yNext) && (ptrCheck.get() != NULL))
-	{
-		ptrNext = ptrCheck;
-		yNext = ptrNext->getWorldPosition().y;
-		ptrNextNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrNext);
-		ptrCheck = World::getNodeByID(ptrNextNavSys->rightYAxis);
-	}
-
-	if (ySelf <= yNext)
-	{
-		NodePtr ptrLeftVehicle = World::getNodeByID(ptrNextNavSys->leftYAxis);
-		if (ptrLeftVehicle.get() != NULL)
-		{
-			CompNavigationSystem* ptrLeftVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrLeftVehicle);
-			ptrLeftVehicleNavSys->rightYAxis = aggregateId;
-			leftYAxis = ptrLeftVehicleNavSys->aggregateId;
-		}
-		ptrNextNavSys->leftYAxis = aggregateId;
-		rightYAxis = ptrNextNavSys->aggregateId;
+		CompNavigationSystem* ptrRightNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrRight);
+		ptrRightNavSys->leftYAxis = aggregateId;
+		rightYAxis = ptrPlayerNavSys->rightYAxis;
+		leftYAxis = player_node_id;
+		ptrPlayerNavSys->rightYAxis = aggregateId;
 	}
 	else
 	{
-		NodePtr ptrRightVehicle = World::getNodeByID(ptrNextNavSys->rightYAxis);
-		if (ptrRightVehicle.get() != NULL)
-		{
-			CompNavigationSystem* ptrRightVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrRightVehicle);
-			ptrRightVehicleNavSys->rightYAxis = aggregateId;
-			rightYAxis = ptrRightVehicleNavSys->aggregateId;
-		}
-		ptrNextNavSys->rightYAxis = aggregateId;
-		leftYAxis = ptrNextNavSys->aggregateId;
+		leftYAxis = player_node_id;
+		ptrPlayerNavSys->rightYAxis = aggregateId;
 	}
 }
 
