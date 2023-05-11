@@ -1,3 +1,6 @@
+/*
+* @author  Konstantin Korobko
+*/
 #pragma once
 #include <UnigineComponentSystem.h>
 #include "CompNavigationSystem.h"

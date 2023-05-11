@@ -11,6 +11,9 @@
  * UNIGINE. at http://unigine.com/
  */
 
+ /*
+ * @author  Konstantin Korobko
+ */
 
 #ifndef __APP_EDITOR_LOGIC_H__
 #define __APP_EDITOR_LOGIC_H__

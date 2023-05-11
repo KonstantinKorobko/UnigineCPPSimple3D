@@ -1,3 +1,6 @@
+/*
+* @author  Konstantin Korobko
+*/
 #include "CompMoveSystem.h"
 #include <UnigineVisualizer.h>
 REGISTER_COMPONENT(CompMoveSystem);

@@ -1,3 +1,6 @@
+/*
+* @author  Konstantin Korobko
+*/
 #include "CompDamageSystem.h"
 REGISTER_COMPONENT(CompDamageSystem);
 

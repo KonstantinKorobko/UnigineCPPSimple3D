@@ -1,3 +1,6 @@
+/*
+* @author  Konstantin Korobko
+*/
 #include "CompRotateSystem.h"
 #include <UnigineVisualizer.h>
 REGISTER_COMPONENT(CompRotateSystem);

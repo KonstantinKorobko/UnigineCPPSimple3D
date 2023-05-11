@@ -1,3 +1,6 @@
+/*
+* @author  Konstantin Korobko
+*/
 #include "CompNavigationSystem.h"
 #include <UnigineGame.h>
 #include <UnigineVisualizer.h>

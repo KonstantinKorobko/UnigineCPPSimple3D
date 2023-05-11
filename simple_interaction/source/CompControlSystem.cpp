@@ -1,3 +1,6 @@
+/*
+* @author  Konstantin Korobko
+*/
 #include "CompControlSystem.h"
 #include <UnigineGame.h>
 REGISTER_COMPONENT(CompControlSystem);

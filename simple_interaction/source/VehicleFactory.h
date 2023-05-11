@@ -1,3 +1,6 @@
+/*
+* @author  Konstantin Korobko
+*/
 #pragma once
 #include <random>
 #include <UnigineNodes.h>

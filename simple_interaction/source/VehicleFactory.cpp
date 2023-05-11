@@ -1,3 +1,6 @@
+/*
+* @author  Konstantin Korobko
+*/
 #include "VehicleFactory.h"
 #include "CompControlSystem.h"
 #include "CompDamageSystem.h"

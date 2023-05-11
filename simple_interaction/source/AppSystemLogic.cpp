@@ -11,6 +11,9 @@
  * UNIGINE. at http://unigine.com/
  */
 
+ /*
+ * @author  Konstantin Korobko
+ */
 
 #include "AppSystemLogic.h"
 
