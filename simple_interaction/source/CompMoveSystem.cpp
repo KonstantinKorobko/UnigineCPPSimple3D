@@ -25,11 +25,9 @@ void CompMoveSystem::update()
 		if (calcBuffer[2] > 1.0)
 		{
 			ptrAggregate->translate(Math::vec3(0.0, 0.01 * speed, 0.0));
-			ptrCompRotateSystem->rotateVec = Math::vec3(calcBuffer[0], calcBuffer[1], calcBuffer[2]);
 		}
 		if (calcBuffer[2] > 0.01)
 		{
-			ptrAggregate->translate(Math::vec3(0.0, 0.01 * speed, 0.0));
 			ptrCompRotateSystem->rotateVec = Math::vec3(calcBuffer[0], calcBuffer[1], calcBuffer[2]);
 		}
 		else
