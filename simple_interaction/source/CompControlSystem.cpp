@@ -16,7 +16,7 @@ void CompControlSystem::update()
 	t15 = t15 - Game::getIFps();
 	if (t15 <= 0.0)
 	{
-		t15 = 15.0;
+		t15 = 4.0;
 
 		ptrCompNavigationSystem->setPatrolPoint(10);
 	}

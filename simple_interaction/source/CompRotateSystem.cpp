@@ -34,11 +34,11 @@ float CompRotateSystem::calcTorque()
 
 	if ((sRotationMat[4] * rotateVec.get().y) - (sRotationMat[5] * rotateVec.get().x) < 0)
 	{
-		return -0.2 * torque;
+		return -/*0.2 * */torque;
 	}
 	else
 	{
-		return 0.2 * torque;
+		return /*0.2 * */torque;
 	}
 
 	return 0.0f;

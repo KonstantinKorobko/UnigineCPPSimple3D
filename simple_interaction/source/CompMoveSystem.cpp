@@ -18,33 +18,25 @@ void CompMoveSystem::init()
 
 void CompMoveSystem::update()
 {
-	//Math::vec3 rotVec = getRotationVec();
-	if (true)
+	if ((setpoint.get().x > 0.0) || (setpoint.get().y > 0.0))
 	{
+		calcMoveData();
 
+		if (calcBuffer[2] > 1.0)
+		{
+			ptrAggregate->translate(Math::vec3(0.0, 0.01 * speed, 0.0));
+			ptrCompRotateSystem->rotateVec = Math::vec3(calcBuffer[0], calcBuffer[1], calcBuffer[2]);
+		}
+		if (calcBuffer[2] > 0.01)
+		{
+			ptrAggregate->translate(Math::vec3(0.0, 0.01 * speed, 0.0));
+			ptrCompRotateSystem->rotateVec = Math::vec3(calcBuffer[0], calcBuffer[1], calcBuffer[2]);
+		}
+		else
+		{
+			setpoint = Math::vec3(0.0);
+		}
 	}
-	calcMoveData();
-
-	if (calcBuffer[2] > 1.0)
-	{
-		ptrAggregate->translate(Math::vec3(0.0, 0.001 * speed, 0.0));
-	}
-
-	if (calcBuffer[2] >= 0.001)
-	{
-		ptrCompRotateSystem->rotateVec = Math::vec3(calcBuffer[0], calcBuffer[1], calcBuffer[2]);
-	}
-	else
-	{
-		ptrCompRotateSystem->rotateVec = Math::vec3(0.0);
-	}
-
-	//Math::vec3 posCurrent = ptrAggregate->getWorldPosition();
-	//Math::vec3 posSet = setpoint;
-
-	//ptrAggregate->translate(Math::vec3(0.0, 0.001 * speed, 0.0));
-
-	//Visualizer::renderLine3D(posCurrent, posSet, Math::vec4(0.0, 0.5, 0.5, 1.0));
 }
 
 void CompMoveSystem::shutdown()
