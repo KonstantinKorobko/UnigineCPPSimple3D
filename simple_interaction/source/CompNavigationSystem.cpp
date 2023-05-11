@@ -47,7 +47,7 @@ void CompNavigationSystem::setPatrolPoint(int radius)
 	seed++;
 	checkPoint.z = 0.0;
 
-	ptrCompMoveSystem->setpoint = checkPoint + spawnPoint.get();
+	ptrCompMoveSystem->setpoint = checkPoint + spawnPoint;
 }
 
 void CompNavigationSystem::update()

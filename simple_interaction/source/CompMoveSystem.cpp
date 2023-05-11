@@ -18,7 +18,7 @@ void CompMoveSystem::init()
 
 void CompMoveSystem::update()
 {
-	if ((setpoint.get().x > 0.0) || (setpoint.get().y > 0.0))
+	if ((setpoint.get().x != 0.0) || (setpoint.get().y != 0.0))
 	{
 		calcMoveData();
 
@@ -26,7 +26,7 @@ void CompMoveSystem::update()
 
 		ptrCompRotateSystem->rotateVec = Math::vec3(calcBuffer[0], calcBuffer[1], calcBuffer[2]);
 
-		if ((calcBuffer[2] > -0.01) && (calcBuffer[2] < 0.01))
+		if ((abs(calcBuffer[2]) - speed) < 0.0)
 		{
 			setpoint = Math::vec3(0.0);
 		}

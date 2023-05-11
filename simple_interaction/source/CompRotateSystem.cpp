@@ -51,6 +51,7 @@ float CompRotateSystem::calcTorque()
 	}
 	else
 	{
+		stateLast = 0;
 		rotateVec = Math::vec3(0.0);
 
 		return 0.0f;
