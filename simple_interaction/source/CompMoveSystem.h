@@ -25,8 +25,15 @@ protected:
 private:
 	NodePtr ptrAggregate;
 
-	Math::vec3 getRotationVec();
+	void calcMoveData();
 
 	CompRotateSystem* ptrCompRotateSystem;
+
+	/*
+	* [0]	rotation vector X
+	* [1]	rotation vector Y
+	* [2]	distance
+	*/
+	float calcBuffer[3];
 };
 
