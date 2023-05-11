@@ -16,7 +16,7 @@ public:
 	//container node id
 	PROP_PARAM(Int, aggregateId, 0);
 	PROP_PARAM(Int, vehicleType, 0);
-	PROP_PARAM(Float, t5, 0);
+	PROP_PARAM(Float, t8, 0);
 
 protected:
 	NodePtr ptrAggregate;

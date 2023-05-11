@@ -18,10 +18,13 @@ public:
 	PROP_PARAM(Vec3, rotateVec, Math::vec3(0.0));
 
 protected:
-	NodePtr ptrAggregate;
-
 	void init();
 	void update();
 	void shutdown();
+
+private:
+	NodePtr ptrAggregate;
+
+	float calcTorque();
 };
 

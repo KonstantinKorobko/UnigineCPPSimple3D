@@ -10,10 +10,10 @@ void CompControlSystem::init()
 
 void CompControlSystem::update()
 {
-	t5 = t5 - Game::getIFps();
-	if (t5 <= 0.0)
+	t8 = t8 - Game::getIFps();
+	if (t8 <= 0.0)
 	{
-		t5 = 5.0;
+		t8 = 8.0;
 
 		ptrCompNavigationSystem->setPatrolPoint(10);
 	}
