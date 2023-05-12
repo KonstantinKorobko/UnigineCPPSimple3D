@@ -18,7 +18,7 @@ void CompControlSystemPlayer::update()
 	{
 		t15 = 4.0;
 
-		ptrCompNavigationSystem->setPatrolPoint(10);
+		ptrCompNavigationSystem->setClotherTarget();
 	}
 }
 

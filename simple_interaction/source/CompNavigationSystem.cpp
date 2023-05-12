@@ -50,12 +50,44 @@ void CompNavigationSystem::setPatrolPoint(int radius)
 	ptrCompMoveSystem->setpoint = checkPoint + spawnPoint;
 }
 
+void CompNavigationSystem::setClotherTarget()
+{
+	NodePtr ptrTarget = World::getNodeByID(rightYAxis);
+	CompNavigationSystem* ptrRightNavSys;
+	Math::vec3 selfPos = ptrAggregate->getWorldPosition();
+	Math::vec3 targetPos;
+	float distance = 0.0;
+	float distanceLast = 10000.0;
+	targetId = rightYAxis;
+
+	while (ptrTarget.get() != NULL)
+	{
+		ptrRightNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrTarget);
+		targetPos = ptrTarget->getWorldPosition();
+		distance = (selfPos.x - targetPos.x) * (selfPos.x - targetPos.x) + (selfPos.y - targetPos.y) * (selfPos.y - targetPos.y);
+		if (distance < distanceLast)
+		{
+			distance = distanceLast;
+			targetId = ptrRightNavSys->aggregateId;
+		}
+		
+		ptrTarget = World::getNodeByID(ptrRightNavSys->rightYAxis);
+	}	
+}
+
 void CompNavigationSystem::update()
 {
-	t500 = t500 - Game::getIFps();
-	if (t500 <= 0.0)
+	t1 = t1 - Game::getIFps();
+	if (t1 <= 0.0)
 	{
-		t500 = 500.0;
+		t1 = 1.0;
+
+		NodePtr ptrTarget = World::getNodeByID(targetId);
+
+		if (ptrTarget.get() != NULL)
+		{
+			ptrCompMoveSystem->setpoint = ptrTarget->getWorldPosition();
+		}
 	}
 	//visualize list of vihicles 
 	NodePtr ptrNextVehicle = World::getNodeByID(leftYAxis);
