@@ -72,7 +72,8 @@
     <ClCompile Include="AppEditorLogic.cpp" />
     <ClCompile Include="AppSystemLogic.cpp" />
     <ClCompile Include="AppWorldLogic.cpp" />
-    <ClCompile Include="CompControlSystem.cpp" />
+    <ClCompile Include="CompControlSystemAI.cpp" />
+    <ClCompile Include="CompControlSystemPlayer.cpp" />
     <ClCompile Include="CompDamageSystem.cpp" />
     <ClCompile Include="CompMoveSystem.cpp" />
     <ClCompile Include="CompNavigationSystem.cpp" />
@@ -84,7 +85,8 @@
     <ClInclude Include="AppEditorLogic.h" />
     <ClInclude Include="AppSystemLogic.h" />
     <ClInclude Include="AppWorldLogic.h" />
-    <ClInclude Include="CompControlSystem.h" />
+    <ClInclude Include="CompControlSystemAI.h" />
+    <ClInclude Include="CompControlSystemPlayer.h" />
     <ClInclude Include="CompDamageSystem.h" />
     <ClInclude Include="CompMoveSystem.h" />
     <ClInclude Include="CompNavigationSystem.h" />

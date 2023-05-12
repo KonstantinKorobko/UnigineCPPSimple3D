@@ -6,11 +6,11 @@
 #include "CompNavigationSystem.h"
 using namespace Unigine;
 
-class CompControlSystem :
+class CompControlSystemAI :
     public ComponentBase
 {
 public:
-	COMPONENT_DEFINE(CompControlSystem, ComponentBase);
+	COMPONENT_DEFINE(CompControlSystemAI, ComponentBase);
 
 	COMPONENT_INIT(init);
 	COMPONENT_UPDATE(update);

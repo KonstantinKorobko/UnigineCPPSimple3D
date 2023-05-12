@@ -2,7 +2,8 @@
 * @author  Konstantin Korobko
 */
 #include "VehicleFactory.h"
-#include "CompControlSystem.h"
+#include "CompControlSystemAI.h"
+#include "CompControlSystemPlayer.h"
 #include "CompDamageSystem.h"
 #include "CompMoveSystem.h"
 #include "CompNavigationSystem.h"
@@ -129,9 +130,18 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	ptrCompRotateSystemTurret->aggregateId = ptrTurret->getID();
 	ptrCompRotateSystemTurret->torque = torqueTurret;
 
-	CompControlSystem* ptrCompControlSystem = ComponentSystem::get()->addComponent<CompControlSystem>(ptrVehicle);
-	ptrCompControlSystem->aggregateId = ptrVehicle->getID();
-	ptrCompControlSystem->vehicleType = vehicle_type;
+	if (vehicle_type != T_VEHICLE_PLAYER)
+	{
+		CompControlSystemAI* ptrCompControlSystemAI = ComponentSystem::get()->addComponent<CompControlSystemAI>(ptrVehicle);
+		ptrCompControlSystemAI->aggregateId = ptrVehicle->getID();
+		ptrCompControlSystemAI->vehicleType = vehicle_type;
+	}
+	else
+	{
+		CompControlSystemPlayer* ptrCompControlSystemPlayer = ComponentSystem::get()->addComponent<CompControlSystemPlayer>(ptrVehicle);
+		ptrCompControlSystemPlayer->aggregateId = ptrVehicle->getID();
+		ptrCompControlSystemPlayer->vehicleType = vehicle_type;
+	}
 }
 
 NodePtr VehicleFactory::createHull(Math::vec3 hull_size)

@@ -1,17 +1,17 @@
 /*
 * @author  Konstantin Korobko
 */
-#include "CompControlSystem.h"
+#include "CompControlSystemPlayer.h"
 #include <UnigineGame.h>
-REGISTER_COMPONENT(CompControlSystem);
+REGISTER_COMPONENT(CompControlSystemPlayer);
 
-void CompControlSystem::init()
+void CompControlSystemPlayer::init()
 {
 	ptrAggregate = World::getNodeByID(aggregateId);
 	ptrCompNavigationSystem = ComponentSystem::get()->getComponent<CompNavigationSystem>(ptrAggregate);
 }
 
-void CompControlSystem::update()
+void CompControlSystemPlayer::update()
 {
 	t15 = t15 - Game::getIFps();
 	if (t15 <= 0.0)
@@ -22,6 +22,6 @@ void CompControlSystem::update()
 	}
 }
 
-void CompControlSystem::shutdown()
+void CompControlSystemPlayer::shutdown()
 {
 }
