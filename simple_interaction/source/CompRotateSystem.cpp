@@ -36,26 +36,21 @@ float CompRotateSystem::calcTorque()
 
 	difference = sRotationMat[4] * rotateVec.get().y - sRotationMat[5] * rotateVec.get().x;
 
+	//crutch for rotate trembling. sry, no commercial algorytms here
+	if ((difference > -0.03) && (difference < 0.03))
+	{
+		rotateVec = Math::vec3(0.0);
+		return 0.0f;
+	}
+	
 	if (difference > 0)
 	{
-		stateCurrent = 1;
+		return torque;
 	}
 	else if (difference < 0)
 	{
-		stateCurrent = -1;
+		return -torque;
 	}
-	if ((stateLast == 0) || (stateLast == stateCurrent))
-	{
-		stateLast = stateCurrent;
-		return stateCurrent * torque;
-	}
-	else
-	{
-		stateLast = 0;
-		rotateVec = Math::vec3(0.0);
-
-		return 0.0f;
-	}	
 
 	return 0.0f;
 }
