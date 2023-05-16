@@ -87,6 +87,13 @@ void CompNavigationSystem::update()
 		if (ptrTarget.get() != NULL)
 		{
 			ptrCompMoveSystem->setpoint = ptrTarget->getWorldPosition();
+
+			targetDistance = ptrCompMoveSystem->getDistance();
+
+			if ((targetDistance - shootRange * shootRange) < 0.0)
+			{
+				//**********************************
+			}
 		}
 	}
 	//visualize list of vihicles 

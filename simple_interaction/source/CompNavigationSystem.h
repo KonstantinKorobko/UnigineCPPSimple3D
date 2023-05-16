@@ -25,6 +25,7 @@ public:
 	PROP_PARAM(Int, targetId, 0);
 	PROP_PARAM(Float, t1, 0);
 	PROP_PARAM(Float, radarRadius, 0);
+	PROP_PARAM(Float, shootRange, 0);
 	PROP_PARAM(Vec3, spawnPoint, Math::vec3(0.0));
 
 	//In this method node register in 2-sided list with Y-axis for easy interection on space.
@@ -44,5 +45,6 @@ private:
 	unsigned int seed;
 	std::mt19937 random;
 
+	float targetDistance;
 };
 

@@ -5,6 +5,11 @@
 #include <UnigineVisualizer.h>
 REGISTER_COMPONENT(CompMoveSystem);
 
+float CompMoveSystem::getDistance()
+{
+	return calcBuffer[2];
+}
+
 void CompMoveSystem::init()
 {
 	ptrAggregate = World::getNodeByID(aggregateId);
