@@ -19,6 +19,7 @@ public:
 	//container node id
 	PROP_PARAM(Node, ptrAggregate);
 	PROP_PARAM(Float, speed, 0.0);
+	PROP_PARAM(Float, tolerance, 0.0);
 	PROP_PARAM(Vec3, setpoint, Math::vec3(0.0));
 
 	float getDistance();

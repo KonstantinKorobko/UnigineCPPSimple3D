@@ -3,6 +3,7 @@
 */
 #include "CompRotateSystem.h"
 #include <UnigineVisualizer.h>
+#include <UnigineGame.h>
 REGISTER_COMPONENT(CompRotateSystem);
 
 void CompRotateSystem::init()

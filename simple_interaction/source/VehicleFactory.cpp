@@ -121,6 +121,7 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	ptrCompNavigationSystem->ptrAggregate = ptrVehicle;
 	ptrCompNavigationSystem->radarRadius = radarRadius;
 	ptrCompNavigationSystem->spawnPoint = vehiclePos;
+	ptrCompNavigationSystem->shootRange = shootRange;
 	if (vehicle_type != T_VEHICLE_PLAYER)
 	{
 		ptrCompNavigationSystem->addYField(ref_global_radar.getPlayer());

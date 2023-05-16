@@ -3,6 +3,7 @@
 */
 #include "CompMoveSystem.h"
 #include <UnigineVisualizer.h>
+#include <UnigineGame.h>
 REGISTER_COMPONENT(CompMoveSystem);
 
 float CompMoveSystem::getDistance()
@@ -29,7 +30,7 @@ void CompMoveSystem::update()
 
 		ptrCompRotateSystem->rotateVec = Math::vec3(calcBuffer[0], calcBuffer[1], calcBuffer[2]);
 
-		if ((abs(calcBuffer[2]) - speed) < 0.0)
+		if ((abs(calcBuffer[2]) - tolerance - speed) < 0.0)
 		{
 			setpoint = Math::vec3(0.0);
 		}
