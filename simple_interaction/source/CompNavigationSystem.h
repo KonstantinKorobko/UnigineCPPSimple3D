@@ -19,17 +19,17 @@ public:
 	COMPONENT_SHUTDOWN(shutdown);
 
 	//container node id
-	PROP_PARAM(Int, aggregateId, 0);
-	PROP_PARAM(Int, leftYAxis, 0);
-	PROP_PARAM(Int, rightYAxis, 0);
-	PROP_PARAM(Int, targetId, 0);
+	PROP_PARAM(Node, ptrAggregate);
+	PROP_PARAM(Node, ptrLeftYAxis);
+	PROP_PARAM(Node, ptrRightYAxis);
+	PROP_PARAM(Node, ptrTarget);
 	PROP_PARAM(Float, t1, 0);
 	PROP_PARAM(Float, radarRadius, 0);
 	PROP_PARAM(Float, shootRange, 0);
 	PROP_PARAM(Vec3, spawnPoint, Math::vec3(0.0));
 
 	//In this method node register in 2-sided list with Y-axis for easy interection on space.
-	void addYField(int player_node_id);
+	void addYField(NodePtr ptr_player);
 	void setPatrolPoint(int radius);
 	void setClotherTarget();
 
@@ -39,7 +39,6 @@ protected:
 	void shutdown();
 
 private:
-	NodePtr ptrAggregate;
 	CompMoveSystem* ptrCompMoveSystem;
 
 	unsigned int seed;

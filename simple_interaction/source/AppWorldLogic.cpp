@@ -38,8 +38,7 @@ int AppWorldLogic::init()
 
 	Unigine::ComponentSystem::get()->initialize();
 
-	NodePtr ptrPlayer = World::getNodeByID(objGlobalRadar.getPlayerId());
-	if (ptrPlayer.get() == NULL)
+	if (objGlobalRadar.getPlayer().get() == NULL)
 	{
 		VehicleFactory::constructVehicle(VehicleFactory::T_VEHICLE_PLAYER, objGlobalRadar);
 	}

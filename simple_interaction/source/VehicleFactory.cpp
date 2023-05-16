@@ -33,7 +33,7 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	{
 	case T_VEHICLE_PLAYER:
 	{
-		ref_global_radar.setPlayerId(ptrVehicle->getID());
+		ref_global_radar.setPlayer(ptrVehicle);
 
 		armor = 100.0;
 		power = 5.0;
@@ -118,12 +118,12 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	ptrCompMoveSystem->speed = speed;
 
 	CompNavigationSystem* ptrCompNavigationSystem = ComponentSystem::get()->addComponent<CompNavigationSystem>(ptrVehicle);
-	ptrCompNavigationSystem->aggregateId = ptrVehicle->getID();
+	ptrCompNavigationSystem->ptrAggregate = ptrVehicle;
 	ptrCompNavigationSystem->radarRadius = radarRadius;
 	ptrCompNavigationSystem->spawnPoint = vehiclePos;
 	if (vehicle_type != T_VEHICLE_PLAYER)
 	{
-		ptrCompNavigationSystem->addYField(ref_global_radar.getPlayerId());
+		ptrCompNavigationSystem->addYField(ref_global_radar.getPlayer());
 	}
 
 	CompDamageSystem* ptrCompDamageSystem = ComponentSystem::get()->addComponent<CompDamageSystem>(ptrTurret);
@@ -210,7 +210,7 @@ NodePtr VehicleFactory::createTurret(Math::vec3 turret_size)
 
 GlobalRadar::GlobalRadar()
 {
-	playerId = 0;
+	ptrPlayer = nullptr;
 	spawnPosX = 0.0;
 	spawnPosY = 0.0;
 }
@@ -219,14 +219,14 @@ GlobalRadar::~GlobalRadar()
 {
 }
 
-int GlobalRadar::getPlayerId()
+NodePtr GlobalRadar::getPlayer()
 {
-	return playerId;
+	return ptrPlayer;
 }
 
-void GlobalRadar::setPlayerId(int node_id)
+void GlobalRadar::setPlayer(NodePtr ptr_player)
 {
-	playerId = node_id;
+	ptrPlayer = ptr_player;
 }
 
 void GlobalRadar::setSpawnPos(float pos_x, float pos_y)

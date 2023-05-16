@@ -15,14 +15,14 @@ public:
 	GlobalRadar();
 	~GlobalRadar();
 
-	int getPlayerId();
-	void setPlayerId(int node_id);
+	NodePtr getPlayer();
+	void setPlayer(NodePtr ptr_player);
 	void setSpawnPos(float pos_x, float pos_y);
 	float getSpawnPosX();
 	float getSpawnPosY();
 
 private:
-	int playerId;
+	NodePtr ptrPlayer;
 	float spawnPosX;
 	float spawnPosY;
 };

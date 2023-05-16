@@ -6,30 +6,28 @@
 #include <UnigineVisualizer.h>
 REGISTER_COMPONENT(CompNavigationSystem);
 
-void CompNavigationSystem::addYField(int player_node_id)
+void CompNavigationSystem::addYField(NodePtr ptr_player)
 {
-	NodePtr ptrPlayer = World::getNodeByID(player_node_id);
-	CompNavigationSystem* ptrPlayerNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrPlayer);
+	CompNavigationSystem* ptrPlayerNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptr_player);
 
-	NodePtr ptrRight = World::getNodeByID(ptrPlayerNavSys->rightYAxis);
+	NodePtr ptrRight = ptrPlayerNavSys->ptrRightYAxis;
 	if (ptrRight.get() != NULL)
 	{
-		CompNavigationSystem* ptrRightNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrRight);
-		ptrRightNavSys->leftYAxis = aggregateId;
-		rightYAxis = ptrPlayerNavSys->rightYAxis;
-		leftYAxis = player_node_id;
-		ptrPlayerNavSys->rightYAxis = aggregateId;
+		CompNavigationSystem* ptrRightNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrPlayerNavSys->ptrRightYAxis);
+		ptrRightNavSys->ptrLeftYAxis = ptrAggregate;
+		ptrRightYAxis = ptrPlayerNavSys->ptrRightYAxis;
+		ptrLeftYAxis = ptr_player;
+		ptrPlayerNavSys->ptrRightYAxis = ptrAggregate;
 	}
 	else
 	{
-		leftYAxis = player_node_id;
-		ptrPlayerNavSys->rightYAxis = aggregateId;
+		ptrLeftYAxis = ptr_player;
+		ptrPlayerNavSys->ptrRightYAxis = ptrAggregate;
 	}
 }
 
 void CompNavigationSystem::init()
 {
-	ptrAggregate = World::getNodeByID(aggregateId);
 	ptrCompMoveSystem = ComponentSystem::get()->getComponent<CompMoveSystem>(ptrAggregate);
 
 	Math::Random rand;
@@ -52,27 +50,27 @@ void CompNavigationSystem::setPatrolPoint(int radius)
 
 void CompNavigationSystem::setClotherTarget()
 {
-	NodePtr ptrTarget = World::getNodeByID(rightYAxis);
-	CompNavigationSystem* ptrRightNavSys;
-	Math::vec3 selfPos = ptrAggregate->getWorldPosition();
-	Math::vec3 targetPos;
+	NodePtr ptrCheck = nullptr;
+	CompNavigationSystem* ptrRightNavSys = nullptr;
+	Math::vec3 posSelf = ptrAggregate->getWorldPosition();
+	Math::vec3 posTarget;
 	float distance = 0.0;
-	float distanceLast = 10000.0;
-	targetId = rightYAxis;
+	float distanceMin = 10000.0;
 
-	while (ptrTarget.get() != NULL)
+	ptrCheck = ptrRightYAxis;
+	while (ptrCheck.get() != NULL)
 	{
-		ptrRightNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrTarget);
-		targetPos = ptrTarget->getWorldPosition();
-		distance = (selfPos.x - targetPos.x) * (selfPos.x - targetPos.x) + (selfPos.y - targetPos.y) * (selfPos.y - targetPos.y);
-		if (distance < distanceLast)
+		ptrRightNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrCheck);
+		posTarget = ptrCheck->getWorldPosition();
+		distance = (posSelf.x - posTarget.x) * (posSelf.x - posTarget.x) + (posSelf.y - posTarget.y) * (posSelf.y - posTarget.y);
+		if (distanceMin > distance)
 		{
-			distance = distanceLast;
-			targetId = ptrRightNavSys->aggregateId;
+			distanceMin = distance;
+			ptrTarget = ptrCheck;
 		}
-		
-		ptrTarget = World::getNodeByID(ptrRightNavSys->rightYAxis);
-	}	
+
+		ptrCheck = ptrRightNavSys->ptrRightYAxis;
+	}
 }
 
 void CompNavigationSystem::update()
@@ -82,9 +80,8 @@ void CompNavigationSystem::update()
 	{
 		t1 = 1.0;
 
-		NodePtr ptrTarget = World::getNodeByID(targetId);
-
-		if (ptrTarget.get() != NULL)
+		/*NodePtr ptrCheck = ptrTarget;
+		if (ptrCheck.get() != NULL)
 		{
 			ptrCompMoveSystem->setpoint = ptrTarget->getWorldPosition();
 
@@ -94,13 +91,19 @@ void CompNavigationSystem::update()
 			{
 				//**********************************
 			}
-		}
+		}*/
 	}
 	//visualize list of vihicles 
-	NodePtr ptrNextVehicle = World::getNodeByID(leftYAxis);
-	if (ptrNextVehicle.get() != NULL)
+	NodePtr ptrCheck = ptrLeftYAxis;
+	if (ptrCheck.get() != NULL)
 	{
-		Visualizer::renderLine3D(ptrAggregate->getWorldPosition(), ptrNextVehicle->getWorldPosition(), Math::vec4(0.0, 1.0, 0.0, 1.0));
+		Visualizer::renderLine3D(ptrAggregate->getWorldPosition(), ptrLeftYAxis->getWorldPosition(), Math::vec4(0.0, 1.0, 0.0, 1.0));
+	}
+	//visualize target
+	ptrCheck = ptrTarget;
+	if (ptrCheck.get() != NULL)
+	{
+		Visualizer::renderLine3D(ptrAggregate->getWorldPosition(), ptrTarget->getWorldPosition(), Math::vec4(1.0, 0.0, 0.0, 1.0));
 	}
 }
 
