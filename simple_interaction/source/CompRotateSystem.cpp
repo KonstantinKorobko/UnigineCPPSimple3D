@@ -7,8 +7,6 @@ REGISTER_COMPONENT(CompRotateSystem);
 
 void CompRotateSystem::init()
 {
-	ptrAggregate = World::getNodeByID(aggregateId);
-
 	stateLast = stateCurrent = 0;
 }
 

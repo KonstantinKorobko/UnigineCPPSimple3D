@@ -110,11 +110,11 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 
 	//create and connect aggregates control components
 	CompRotateSystem* ptrCompRotateSystemVehicle = ComponentSystem::get()->addComponent<CompRotateSystem>(ptrVehicle);
-	ptrCompRotateSystemVehicle->aggregateId = ptrVehicle->getID();
+	ptrCompRotateSystemVehicle->ptrAggregate = ptrVehicle;
 	ptrCompRotateSystemVehicle->torque = torqueVehicle;
 
 	CompMoveSystem* ptrCompMoveSystem = ComponentSystem::get()->addComponent<CompMoveSystem>(ptrVehicle);
-	ptrCompMoveSystem->aggregateId = ptrVehicle->getID();
+	ptrCompMoveSystem->ptrAggregate = ptrVehicle;
 	ptrCompMoveSystem->speed = speed;
 
 	CompNavigationSystem* ptrCompNavigationSystem = ComponentSystem::get()->addComponent<CompNavigationSystem>(ptrVehicle);
@@ -127,24 +127,24 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	}
 
 	CompDamageSystem* ptrCompDamageSystem = ComponentSystem::get()->addComponent<CompDamageSystem>(ptrTurret);
-	ptrCompDamageSystem->aggregateId = ptrTurret->getID();
+	ptrCompDamageSystem->ptrAggregate = ptrTurret;
 	ptrCompDamageSystem->armor = armor;
 	ptrCompDamageSystem->power = power;
 
 	CompRotateSystem* ptrCompRotateSystemTurret = ComponentSystem::get()->addComponent<CompRotateSystem>(ptrTurret);
-	ptrCompRotateSystemTurret->aggregateId = ptrTurret->getID();
+	ptrCompRotateSystemTurret->ptrAggregate = ptrTurret;
 	ptrCompRotateSystemTurret->torque = torqueTurret;
 
 	if (vehicle_type != T_VEHICLE_PLAYER)
 	{
 		CompControlSystemAI* ptrCompControlSystemAI = ComponentSystem::get()->addComponent<CompControlSystemAI>(ptrVehicle);
-		ptrCompControlSystemAI->aggregateId = ptrVehicle->getID();
+		ptrCompControlSystemAI->ptrAggregate = ptrVehicle;
 		ptrCompControlSystemAI->vehicleType = vehicle_type;
 	}
 	else
 	{
 		CompControlSystemPlayer* ptrCompControlSystemPlayer = ComponentSystem::get()->addComponent<CompControlSystemPlayer>(ptrVehicle);
-		ptrCompControlSystemPlayer->aggregateId = ptrVehicle->getID();
+		ptrCompControlSystemPlayer->ptrAggregate = ptrVehicle;
 		ptrCompControlSystemPlayer->vehicleType = vehicle_type;
 	}
 }

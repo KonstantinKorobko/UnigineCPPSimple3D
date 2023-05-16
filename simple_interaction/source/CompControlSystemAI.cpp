@@ -7,7 +7,6 @@ REGISTER_COMPONENT(CompControlSystemAI);
 
 void CompControlSystemAI::init()
 {
-	ptrAggregate = World::getNodeByID(aggregateId);
 	ptrCompNavigationSystem = ComponentSystem::get()->getComponent<CompNavigationSystem>(ptrAggregate);
 }
 

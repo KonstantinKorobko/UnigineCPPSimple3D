@@ -10,8 +10,7 @@ void CompNavigationSystem::addYField(NodePtr ptr_player)
 {
 	CompNavigationSystem* ptrPlayerNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptr_player);
 
-	NodePtr ptrRight = ptrPlayerNavSys->ptrRightYAxis;
-	if (ptrRight.get() != NULL)
+	if (ptrPlayerNavSys->ptrRightYAxis.get() != nullptr)
 	{
 		CompNavigationSystem* ptrRightNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrPlayerNavSys->ptrRightYAxis);
 		ptrRightNavSys->ptrLeftYAxis = ptrAggregate;
@@ -58,7 +57,7 @@ void CompNavigationSystem::setClotherTarget()
 	float distanceMin = 10000.0;
 
 	ptrCheck = ptrRightYAxis;
-	while (ptrCheck.get() != NULL)
+	while (ptrCheck.get() != nullptr)
 	{
 		ptrRightNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrCheck);
 		posTarget = ptrCheck->getWorldPosition();
@@ -80,8 +79,7 @@ void CompNavigationSystem::update()
 	{
 		t1 = 1.0;
 
-		/*NodePtr ptrCheck = ptrTarget;
-		if (ptrCheck.get() != NULL)
+		if (ptrTarget.get() != nullptr)
 		{
 			ptrCompMoveSystem->setpoint = ptrTarget->getWorldPosition();
 
@@ -91,17 +89,15 @@ void CompNavigationSystem::update()
 			{
 				//**********************************
 			}
-		}*/
+		}
 	}
 	//visualize list of vihicles 
-	NodePtr ptrCheck = ptrLeftYAxis;
-	if (ptrCheck.get() != NULL)
+	if (ptrLeftYAxis.get() != nullptr)
 	{
 		Visualizer::renderLine3D(ptrAggregate->getWorldPosition(), ptrLeftYAxis->getWorldPosition(), Math::vec4(0.0, 1.0, 0.0, 1.0));
 	}
 	//visualize target
-	ptrCheck = ptrTarget;
-	if (ptrCheck.get() != NULL)
+	if (ptrTarget.get() != nullptr)
 	{
 		Visualizer::renderLine3D(ptrAggregate->getWorldPosition(), ptrTarget->getWorldPosition(), Math::vec4(1.0, 0.0, 0.0, 1.0));
 	}

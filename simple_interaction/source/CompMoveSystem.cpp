@@ -12,8 +12,6 @@ float CompMoveSystem::getDistance()
 
 void CompMoveSystem::init()
 {
-	ptrAggregate = World::getNodeByID(aggregateId);
-
 	ptrCompRotateSystem = ComponentSystem::get()->getComponent<CompRotateSystem>(ptrAggregate);
 
 	calcBuffer[0] = 0.0;

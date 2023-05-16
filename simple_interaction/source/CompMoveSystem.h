@@ -17,7 +17,7 @@ public:
 	COMPONENT_SHUTDOWN(shutdown);
 
 	//container node id
-	PROP_PARAM(Int, aggregateId, 0);
+	PROP_PARAM(Node, ptrAggregate);
 	PROP_PARAM(Float, speed, 0.0);
 	PROP_PARAM(Vec3, setpoint, Math::vec3(0.0));
 
@@ -28,10 +28,6 @@ protected:
 	void update();
 	void shutdown();
 private:
-	NodePtr ptrAggregate;
-
-	void calcMoveData();
-
 	CompRotateSystem* ptrCompRotateSystem;
 
 	/*
@@ -40,5 +36,6 @@ private:
 	* [2]	distance
 	*/
 	float calcBuffer[3];
+	void calcMoveData();
 };
 

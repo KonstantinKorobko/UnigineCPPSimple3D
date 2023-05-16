@@ -17,17 +17,16 @@ public:
 	COMPONENT_SHUTDOWN(shutdown);
 
 	//container node id
-	PROP_PARAM(Int, aggregateId, 0);
+	PROP_PARAM(Node, ptrAggregate);
 	PROP_PARAM(Int, vehicleType, 0);
 	PROP_PARAM(Float, t15, 0);
 
 protected:
-	NodePtr ptrAggregate;
-
 	void init();
 	void update();
 	void shutdown();
 
+private:
 	CompNavigationSystem* ptrCompNavigationSystem;
 };
 

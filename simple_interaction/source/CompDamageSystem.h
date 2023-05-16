@@ -16,7 +16,7 @@ public:
 	COMPONENT_SHUTDOWN(shutdown);
 
 	//container node id
-	PROP_PARAM(Int, aggregateId, 0);
+	PROP_PARAM(Node, ptrAggregate);
 	PROP_PARAM(Float, armor, 0.0);
 	PROP_PARAM(Float, power, 0.0);
 
@@ -27,6 +27,6 @@ protected:
 	void update();
 	void shutdown();
 
-
+private:
 };
 
