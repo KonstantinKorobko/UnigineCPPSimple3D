@@ -32,7 +32,7 @@ void CompRotateSystem::shutdown()
 
 float CompRotateSystem::calcTorque()
 {
-	Math::mat3 sRotationMat = ptrAggregate->getRotation().getMat3();
+	Math::mat3 sRotationMat = ptrAggregate->getWorldRotation().getMat3();
 
 	difference = sRotationMat[4] * rotateVec.get().y - sRotationMat[5] * rotateVec.get().x;
 

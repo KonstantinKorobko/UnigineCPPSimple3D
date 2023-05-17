@@ -23,8 +23,6 @@ public:
 	PROP_PARAM(Float, tolerance, 0.0);
 	PROP_PARAM(Vec3, setpoint, Math::vec3(0.0));
 
-	float getDistance();
-
 protected:
 	void init();
 	void update();

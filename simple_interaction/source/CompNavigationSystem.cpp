@@ -72,11 +72,6 @@ void CompNavigationSystem::getClotherTarget()
 
 void CompNavigationSystem::update()
 {
-	t1 = t1 - Game::getIFps();
-	if (t1 <= 0.0)
-	{
-		t1 = 1.0;		
-	}
 	//visualize list of vihicles 
 	if (ptrLeftYAxis.get() != nullptr)
 	{

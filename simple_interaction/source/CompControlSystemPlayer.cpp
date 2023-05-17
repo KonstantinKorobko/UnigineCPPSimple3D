@@ -14,17 +14,25 @@ void CompControlSystemPlayer::init()
 
 void CompControlSystemPlayer::update()
 {
-	t15 = t15 - Game::getIFps();
-	if (t15 <= 0.0)
+	t0_5 = t0_5 - Game::getIFps();
+	if (t0_5 <= 0.0)
 	{
-		t15 = 4.0;
+		t0_5 = 0.5;
 
-		ptrCompNavigationSystem->getClotherTarget();
-	}
-	if (ptrCompNavigationSystem->ptrTarget.get() != nullptr)
-	{
-		ptrCompMoveSystem->setpoint = ptrCompNavigationSystem->ptrTarget->getWorldPosition();
-		ptrCompMoveSystem->tolerance = ptrCompWeaponSystem->range - 1.0;
+		t5 = t5 - t0_5;
+
+		if (t5 <= 0.0)
+		{
+			t5 = 5.0;
+			ptrCompNavigationSystem->getClotherTarget();
+		}
+
+		if (ptrCompNavigationSystem->ptrTarget.get() != nullptr)
+		{
+			ptrCompMoveSystem->setpoint = ptrCompNavigationSystem->ptrTarget->getWorldPosition();
+			ptrCompMoveSystem->tolerance = ptrCompWeaponSystem->range - 1.0;
+			ptrCompWeaponSystem->ptrTarget = ptrCompNavigationSystem->ptrTarget;
+		}
 	}
 }
 

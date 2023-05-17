@@ -6,11 +6,6 @@
 #include <UnigineGame.h>
 REGISTER_COMPONENT(CompMoveSystem);
 
-float CompMoveSystem::getDistance()
-{
-	return calcBuffer[2];
-}
-
 void CompMoveSystem::init()
 {
 	ptrCompRotateSystem = ComponentSystem::get()->getComponent<CompRotateSystem>(ptrAggregate);

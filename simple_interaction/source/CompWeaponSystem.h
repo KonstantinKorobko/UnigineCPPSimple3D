@@ -3,6 +3,7 @@
 */
 #pragma once
 #include <UnigineComponentSystem.h>
+#include "CompRotateSystem.h"
 using namespace Unigine;
 
 class CompWeaponSystem :
@@ -29,5 +30,14 @@ protected:
 	void shutdown();
 
 private:
+	CompRotateSystem* ptrCompRotateSystem;
+
+/*
+* [0]	rotation vector X
+* [1]	rotation vector Y
+* [2]	distance
+*/
+	float calcBuffer[3];
+	void calcData();
 };
 
