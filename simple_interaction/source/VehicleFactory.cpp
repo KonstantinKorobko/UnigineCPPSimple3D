@@ -8,6 +8,7 @@
 #include "CompMoveSystem.h"
 #include "CompNavigationSystem.h"
 #include "CompRotateSystem.h"
+#include "CompWeaponSystem.h"
 #include <UnigineMeshDynamic.h>
 #include <UnigineObjects.h>
 #include <UniginePrimitives.h>
@@ -121,32 +122,39 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	ptrCompNavigationSystem->ptrAggregate = ptrVehicle;
 	ptrCompNavigationSystem->radarRadius = radarRadius;
 	ptrCompNavigationSystem->spawnPoint = vehiclePos;
-	ptrCompNavigationSystem->shootRange = shootRange;
 	if (vehicle_type != T_VEHICLE_PLAYER)
 	{
 		ptrCompNavigationSystem->addYField(ref_global_radar.getPlayer());
 	}
 
-	CompDamageSystem* ptrCompDamageSystem = ComponentSystem::get()->addComponent<CompDamageSystem>(ptrTurret);
-	ptrCompDamageSystem->ptrAggregate = ptrTurret;
+	CompDamageSystem* ptrCompDamageSystem = ComponentSystem::get()->addComponent<CompDamageSystem>(ptrVehicle);
+	ptrCompDamageSystem->ptrAggregate = ptrVehicle;
 	ptrCompDamageSystem->armor = armor;
-	ptrCompDamageSystem->power = power;
 
 	CompRotateSystem* ptrCompRotateSystemTurret = ComponentSystem::get()->addComponent<CompRotateSystem>(ptrTurret);
 	ptrCompRotateSystemTurret->ptrAggregate = ptrTurret;
 	ptrCompRotateSystemTurret->torque = torqueTurret;
+
+	CompWeaponSystem* ptrCompWeaponSystem = ComponentSystem::get()->addComponent<CompWeaponSystem>(ptrTurret);
+	ptrCompWeaponSystem->ptrAggregate = ptrTurret;
+	ptrCompWeaponSystem->power = power;
+	ptrCompWeaponSystem->range = shootRange;
 
 	if (vehicle_type != T_VEHICLE_PLAYER)
 	{
 		CompControlSystemAI* ptrCompControlSystemAI = ComponentSystem::get()->addComponent<CompControlSystemAI>(ptrVehicle);
 		ptrCompControlSystemAI->ptrAggregate = ptrVehicle;
 		ptrCompControlSystemAI->vehicleType = vehicle_type;
+		ptrCompControlSystemAI->ptrHull = ptrHull;
+		ptrCompControlSystemAI->ptrTurret = ptrTurret;
 	}
 	else
 	{
 		CompControlSystemPlayer* ptrCompControlSystemPlayer = ComponentSystem::get()->addComponent<CompControlSystemPlayer>(ptrVehicle);
 		ptrCompControlSystemPlayer->ptrAggregate = ptrVehicle;
 		ptrCompControlSystemPlayer->vehicleType = vehicle_type;
+		ptrCompControlSystemPlayer->ptrHull = ptrHull;
+		ptrCompControlSystemPlayer->ptrTurret = ptrTurret;
 	}
 }
 

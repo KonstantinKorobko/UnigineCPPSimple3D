@@ -78,6 +78,7 @@
     <ClCompile Include="CompMoveSystem.cpp" />
     <ClCompile Include="CompNavigationSystem.cpp" />
     <ClCompile Include="CompRotateSystem.cpp" />
+    <ClCompile Include="CompWeaponSystem.cpp" />
     <ClCompile Include="VehicleFactory.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -91,6 +92,7 @@
     <ClInclude Include="CompMoveSystem.h" />
     <ClInclude Include="CompNavigationSystem.h" />
     <ClInclude Include="CompRotateSystem.h" />
+    <ClInclude Include="CompWeaponSystem.h" />
     <ClInclude Include="VehicleFactory.h" />
   </ItemGroup>
   <ItemGroup>

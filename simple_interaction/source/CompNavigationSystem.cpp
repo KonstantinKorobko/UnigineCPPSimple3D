@@ -27,14 +27,12 @@ void CompNavigationSystem::addYField(NodePtr ptr_player)
 
 void CompNavigationSystem::init()
 {
-	ptrCompMoveSystem = ComponentSystem::get()->getComponent<CompMoveSystem>(ptrAggregate);
-
 	Math::Random rand;
 	seed = rand.getSeed();
 	random.seed(seed);
 }
 
-void CompNavigationSystem::setPatrolPoint(int radius)
+Math::vec3 CompNavigationSystem::getPatrolPoint(int radius)
 {
 	std::uniform_real_distribution<> checkRange(-1.0, 1.0);
 	Math::vec3 checkPoint;
@@ -44,10 +42,10 @@ void CompNavigationSystem::setPatrolPoint(int radius)
 	seed++;
 	checkPoint.z = 0.0;
 
-	ptrCompMoveSystem->setpoint = checkPoint + spawnPoint;
+	return checkPoint + spawnPoint;
 }
 
-void CompNavigationSystem::setClotherTarget()
+void CompNavigationSystem::getClotherTarget()
 {
 	NodePtr ptrCheck = nullptr;
 	CompNavigationSystem* ptrRightNavSys = nullptr;
@@ -77,15 +75,7 @@ void CompNavigationSystem::update()
 	t1 = t1 - Game::getIFps();
 	if (t1 <= 0.0)
 	{
-		t1 = 1.0;
-
-		if (ptrTarget.get() != nullptr)
-		{
-			ptrCompMoveSystem->setpoint = ptrTarget->getWorldPosition();
-			ptrCompMoveSystem->tolerance = shootRange;
-			
-			targetDistance = ptrCompMoveSystem->getDistance();
-		}
+		t1 = 1.0;		
 	}
 	//visualize list of vihicles 
 	if (ptrLeftYAxis.get() != nullptr)

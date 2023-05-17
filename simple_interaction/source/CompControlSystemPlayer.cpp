@@ -8,6 +8,8 @@ REGISTER_COMPONENT(CompControlSystemPlayer);
 void CompControlSystemPlayer::init()
 {
 	ptrCompNavigationSystem = ComponentSystem::get()->getComponent<CompNavigationSystem>(ptrAggregate);
+	ptrCompMoveSystem = ComponentSystem::get()->getComponent<CompMoveSystem>(ptrAggregate);
+	ptrCompWeaponSystem = ComponentSystem::get()->getComponent<CompWeaponSystem>(ptrTurret);
 }
 
 void CompControlSystemPlayer::update()
@@ -17,7 +19,12 @@ void CompControlSystemPlayer::update()
 	{
 		t15 = 4.0;
 
-		ptrCompNavigationSystem->setClotherTarget();
+		ptrCompNavigationSystem->getClotherTarget();
+	}
+	if (ptrCompNavigationSystem->ptrTarget.get() != nullptr)
+	{
+		ptrCompMoveSystem->setpoint = ptrCompNavigationSystem->ptrTarget->getWorldPosition();
+		ptrCompMoveSystem->tolerance = ptrCompWeaponSystem->range - 1.0;
 	}
 }
 

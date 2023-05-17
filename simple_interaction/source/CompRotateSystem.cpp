@@ -18,6 +18,7 @@ void CompRotateSystem::update()
 		//at this time i don't go to calculate with quaternions
 		ptrAggregate->rotate(0.0, 0.0, calcTorque());
 
+		//debug
 		Math::vec3 posCurrent = ptrAggregate->getWorldPosition();
 		Math::vec3 posRotate = posCurrent + rotateVec;
 		posRotate.z = posCurrent.z;

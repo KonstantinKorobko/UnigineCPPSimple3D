@@ -5,11 +5,11 @@
 #include <UnigineComponentSystem.h>
 using namespace Unigine;
 
-class CompDamageSystem :
+class CompWeaponSystem :
     public ComponentBase
 {
 public:
-	COMPONENT_DEFINE(CompDamageSystem, ComponentBase);
+	COMPONENT_DEFINE(CompWeaponSystem, ComponentBase);
 
 	COMPONENT_INIT(init);
 	COMPONENT_UPDATE(update);
@@ -17,10 +17,12 @@ public:
 
 	//container node id
 	PROP_PARAM(Node, ptrAggregate);
-	PROP_PARAM(Float, armor, 0.0);
+	PROP_PARAM(Node, ptrTarget);
+	PROP_PARAM(Float, power, 0.0);
+	PROP_PARAM(Float, range, 0.0);
 
 	PROP_PARAM(Int, numAmmo, 0);
-	//PROP_PARAM(NodePtr Array, bulletsGet, 0);
+
 protected:
 	void init();
 	void update();

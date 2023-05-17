@@ -8,6 +8,8 @@ REGISTER_COMPONENT(CompControlSystemAI);
 void CompControlSystemAI::init()
 {
 	ptrCompNavigationSystem = ComponentSystem::get()->getComponent<CompNavigationSystem>(ptrAggregate);
+	ptrCompMoveSystem = ComponentSystem::get()->getComponent<CompMoveSystem>(ptrAggregate);
+	ptrCompWeaponSystem = ComponentSystem::get()->getComponent<CompWeaponSystem>(ptrTurret);
 }
 
 void CompControlSystemAI::update()
@@ -17,7 +19,8 @@ void CompControlSystemAI::update()
 	{
 		t15 = 4.0;
 
-		ptrCompNavigationSystem->setPatrolPoint(10);
+		ptrCompMoveSystem->setpoint = ptrCompNavigationSystem->getPatrolPoint(10);
+		ptrCompMoveSystem->tolerance = 0.0;
 	}
 }
 

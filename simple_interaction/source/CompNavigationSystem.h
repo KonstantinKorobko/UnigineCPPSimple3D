@@ -3,7 +3,7 @@
 */
 #pragma once
 #include <UnigineComponentSystem.h>
-#include "CompMoveSystem.h"
+
 #include <random>
 
 using namespace Unigine;
@@ -25,13 +25,12 @@ public:
 	PROP_PARAM(Node, ptrTarget);
 	PROP_PARAM(Float, t1, 0);
 	PROP_PARAM(Float, radarRadius, 0);
-	PROP_PARAM(Float, shootRange, 0);
 	PROP_PARAM(Vec3, spawnPoint, Math::vec3(0.0));
 
 	//In this method node register in 2-sided list with Y-axis for easy interection on space.
 	void addYField(NodePtr ptr_player);
-	void setPatrolPoint(int radius);
-	void setClotherTarget();
+	Math::vec3 getPatrolPoint(int radius);
+	void getClotherTarget();
 
 protected:
 	void init();
@@ -39,8 +38,6 @@ protected:
 	void shutdown();
 
 private:
-	CompMoveSystem* ptrCompMoveSystem;
-
 	unsigned int seed;
 	std::mt19937 random;
 
