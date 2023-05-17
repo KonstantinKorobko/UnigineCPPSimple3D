@@ -29,7 +29,6 @@ void CompMoveSystem::update()
 	if ((abs(calcBuffer[2]) - tolerance - speed) > 0.0)
 	{
 		ptrAggregate->translate(Math::vec3(0.0, speed, 0.0));
-		//setpoint = Math::vec3(0.0);
 	}
 }
 
