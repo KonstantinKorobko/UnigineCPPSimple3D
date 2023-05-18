@@ -73,6 +73,7 @@
     <ClCompile Include="AppSystemLogic.cpp" />
     <ClCompile Include="AppWorldLogic.cpp" />
     <ClCompile Include="CompControlSystemAI.cpp" />
+    <ClCompile Include="CompControlSystemMissile.cpp" />
     <ClCompile Include="CompControlSystemPlayer.cpp" />
     <ClCompile Include="CompDamageSystem.cpp" />
     <ClCompile Include="CompMoveSystem.cpp" />
@@ -87,6 +88,7 @@
     <ClInclude Include="AppSystemLogic.h" />
     <ClInclude Include="AppWorldLogic.h" />
     <ClInclude Include="CompControlSystemAI.h" />
+    <ClInclude Include="CompControlSystemMissile.h" />
     <ClInclude Include="CompControlSystemPlayer.h" />
     <ClInclude Include="CompDamageSystem.h" />
     <ClInclude Include="CompMoveSystem.h" />

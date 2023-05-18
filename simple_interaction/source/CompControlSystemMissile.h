@@ -1,15 +1,14 @@
 /*
 * @author  Konstantin Korobko
 */
-#pragma once
-#include <UnigineComponentSystem.h>
+#include "CompMoveSystem.h"
 using namespace Unigine;
 
-class CompRotateSystem :
+class CompControlSystemMissile :
     public ComponentBase
 {
 public:
-	COMPONENT_DEFINE(CompRotateSystem, ComponentBase);
+	COMPONENT_DEFINE(CompControlSystemMissile, ComponentBase);
 
 	COMPONENT_INIT(init);
 	COMPONENT_UPDATE(update);
@@ -17,9 +16,9 @@ public:
 
 	//container node id
 	PROP_PARAM(Node, ptrAggregate);
-	PROP_PARAM(Float, torque, 0.0);
-	PROP_PARAM(Float, difference, 0.0);
-	PROP_PARAM(Vec3, rotateVec, Math::vec3(0.0));
+	PROP_PARAM(Node, ptrTarget);
+	PROP_PARAM(Float, damage, 0.0);
+	PROP_PARAM(Float, lifeTime, 0);
 
 protected:
 	void init();
@@ -27,8 +26,6 @@ protected:
 	void shutdown();
 
 private:
-	float calcTorque();
-	int stateCurrent;
-	int stateLast;
+	CompMoveSystem* ptrCompMoveSystem;
 };
 

@@ -21,8 +21,9 @@ public:
 	PROP_PARAM(Node, ptrTarget);
 	PROP_PARAM(Float, power, 0.0);
 	PROP_PARAM(Float, range, 0.0);
+	PROP_PARAM(Float, tReload, 0.0);
 
-	PROP_PARAM(Int, numAmmo, 0);
+	//PROP_PARAM(Int, numAmmo, 0);//?
 
 protected:
 	void init();
@@ -39,5 +40,8 @@ private:
 */
 	float calcBuffer[3];
 	void calcData();
+
+	//simple missile factory
+	void fire(int missile_type = 0);
 };
 
