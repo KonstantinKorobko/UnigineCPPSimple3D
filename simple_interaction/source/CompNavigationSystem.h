@@ -29,6 +29,7 @@ public:
 
 	//In this method node register in 2-sided list with Y-axis for easy interection on space.
 	void addYField(NodePtr ptr_player);
+	void removeYField();
 	Math::vec3 getPatrolPoint(int radius);
 	void getClotherTarget();
 

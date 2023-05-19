@@ -3,6 +3,7 @@
 */
 #pragma once
 #include <UnigineComponentSystem.h>
+#include "CompMoveSystem.h"
 #include "CompRotateSystem.h"
 using namespace Unigine;
 
@@ -17,11 +18,12 @@ public:
 	COMPONENT_SHUTDOWN(shutdown);
 
 	//container node id
+	PROP_PARAM(Node, ptrVehicle);
 	PROP_PARAM(Node, ptrAggregate);
 	PROP_PARAM(Node, ptrTarget);
 	PROP_PARAM(Float, power, 0.0);
 	PROP_PARAM(Float, range, 0.0);
-	PROP_PARAM(Float, tReload, 0.0);
+	PROP_PARAM(Float, t_Reload, 0.0);
 
 	//PROP_PARAM(Int, numAmmo, 0);//?
 
@@ -32,6 +34,7 @@ protected:
 
 private:
 	CompRotateSystem* ptrCompRotateSystem;
+	CompMoveSystem* ptrCompMoveSystem;
 
 /*
 * [0]	rotation vector X
@@ -42,6 +45,6 @@ private:
 	void calcData();
 
 	//simple missile factory
-	void fire(int missile_type = 0);
+	void shoot(int missile_type = 0);
 };
 

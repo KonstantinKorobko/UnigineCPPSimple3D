@@ -7,6 +7,7 @@ REGISTER_COMPONENT(CompControlSystemAI);
 
 void CompControlSystemAI::init()
 {
+	ptrCompDamageSystem = ComponentSystem::get()->getComponent<CompDamageSystem>(ptrAggregate);
 	ptrCompNavigationSystem = ComponentSystem::get()->getComponent<CompNavigationSystem>(ptrAggregate);
 	ptrCompMoveSystem = ComponentSystem::get()->getComponent<CompMoveSystem>(ptrAggregate);
 	ptrCompWeaponSystem = ComponentSystem::get()->getComponent<CompWeaponSystem>(ptrTurret);
@@ -21,6 +22,12 @@ void CompControlSystemAI::update()
 
 		ptrCompMoveSystem->setpoint = ptrCompNavigationSystem->getPatrolPoint(10);
 		ptrCompMoveSystem->tolerance = 0.0;
+	}
+	if (ptrCompDamageSystem->armor < 0.0)
+	{
+		ptrCompNavigationSystem->removeYField();
+
+		ptrAggregate->deleteLater();
 	}
 }
 

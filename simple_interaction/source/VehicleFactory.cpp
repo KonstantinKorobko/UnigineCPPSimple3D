@@ -136,6 +136,7 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	ptrCompRotateSystemTurret->torque = torqueTurret;
 
 	CompWeaponSystem* ptrCompWeaponSystem = ComponentSystem::get()->addComponent<CompWeaponSystem>(ptrTurret);
+	ptrCompWeaponSystem->ptrVehicle = ptrVehicle;
 	ptrCompWeaponSystem->ptrAggregate = ptrTurret;
 	ptrCompWeaponSystem->power = power;
 	ptrCompWeaponSystem->range = shootRange;

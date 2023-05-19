@@ -1,5 +1,7 @@
+/*
+* @author  Konstantin Korobko
+*/
 #include "CompWeaponSystem.h"
-#include "CompMoveSystem.h"
 #include "CompControlSystemMissile.h"
 #include <UniginePrimitives.h>
 #include <UnigineGame.h>
@@ -8,6 +10,7 @@ REGISTER_COMPONENT(CompWeaponSystem);
 void CompWeaponSystem::init()
 {
 	ptrCompRotateSystem = ComponentSystem::get()->getComponent<CompRotateSystem>(ptrAggregate);
+	ptrCompMoveSystem = ComponentSystem::get()->getComponent<CompMoveSystem>(ptrVehicle);
 }
 
 void CompWeaponSystem::update()
@@ -18,16 +21,16 @@ void CompWeaponSystem::update()
 
 		ptrCompRotateSystem->rotateVec = Math::vec3(calcBuffer[0], calcBuffer[1], calcBuffer[2]);
 
-		if ((ptrCompRotateSystem->difference > -0.1) && (ptrCompRotateSystem->difference < 0.1) && (tReload <= 0.0))
+		if ((ptrCompRotateSystem->difference > -0.05) && (ptrCompRotateSystem->difference < 0.05) && (t_Reload <= 0.0) && (ptrCompMoveSystem->distance <= range))
 		{
-			fire();
+			shoot();
 
-			tReload = 1.5;
+			t_Reload = 1.5;
 		}
 	}
-	if (tReload > 0.0)
+	if (t_Reload > 0.0)
 	{
-		tReload = tReload - Game::getIFps();
+		t_Reload = t_Reload - Game::getIFps();
 	}
 }
 
@@ -47,7 +50,7 @@ void CompWeaponSystem::calcData()
 	calcBuffer[1] /= calcBuffer[2];
 }
 
-void CompWeaponSystem::fire(int missile_type)
+void CompWeaponSystem::shoot(int missile_type)
 {
 	ObjectMeshDynamicPtr ptrMissile = Primitives::createSphere(0.1);
 	Primitives::addSphereSurface(ptrMissile, 0.1, Math::mat4_identity);

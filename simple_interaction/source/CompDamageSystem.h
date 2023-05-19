@@ -18,9 +18,9 @@ public:
 	//container node id
 	PROP_PARAM(Node, ptrAggregate);
 	PROP_PARAM(Float, armor, 0.0);
+	PROP_PARAM(Float, t0_2, 0);
+	PROP_PARAM(Float, damageAdd, 0);
 
-	PROP_PARAM(Int, numAmmo, 0);
-	//PROP_PARAM(NodePtr Array, bulletsGet, 0);
 protected:
 	void init();
 	void update();

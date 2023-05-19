@@ -25,6 +25,33 @@ void CompNavigationSystem::addYField(NodePtr ptr_player)
 	}
 }
 
+void CompNavigationSystem::removeYField()
+{
+	CompNavigationSystem* ptrLeftVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrLeftYAxis);
+	CompNavigationSystem* ptrRightVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrRightYAxis);
+
+	//to do: last target leave from list
+	/*if ((ptrRightVehicleNavSys->ptrLeftYAxis.get() != nullptr) && (ptrLeftYAxis.get() != nullptr))
+	{
+
+	}
+
+	if (ptrLeftVehicleNavSys->ptrRightYAxis.get().get() != nullptr)
+	{
+
+	}*/
+	
+	
+	if (ptrLeftYAxis.get() != nullptr)
+	{
+		ptrLeftVehicleNavSys->ptrRightYAxis = ptrRightYAxis;
+	}
+	if (ptrRightYAxis.get() != nullptr)
+	{
+		ptrRightVehicleNavSys->ptrLeftYAxis = ptrLeftYAxis;
+	}
+}
+
 void CompNavigationSystem::init()
 {
 	Math::Random rand;
@@ -73,9 +100,9 @@ void CompNavigationSystem::getClotherTarget()
 void CompNavigationSystem::update()
 {
 	//visualize list of vihicles 
-	if (ptrLeftYAxis.get() != nullptr)
+	if (ptrRightYAxis.get() != nullptr)
 	{
-		Visualizer::renderLine3D(ptrAggregate->getWorldPosition(), ptrLeftYAxis->getWorldPosition(), Math::vec4(0.0, 1.0, 0.0, 1.0));
+		Visualizer::renderLine3D(ptrAggregate->getWorldPosition(), ptrRightYAxis->getWorldPosition(), Math::vec4(0.0, 1.0, 0.0, 1.0));
 	}
 	//visualize target
 	if (ptrTarget.get() != nullptr)
@@ -85,5 +112,5 @@ void CompNavigationSystem::update()
 }
 
 void CompNavigationSystem::shutdown()
-{
+{	
 }

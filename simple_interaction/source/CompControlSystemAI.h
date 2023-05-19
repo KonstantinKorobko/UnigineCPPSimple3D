@@ -3,6 +3,7 @@
 */
 #pragma once
 #include <UnigineComponentSystem.h>
+#include "CompDamageSystem.h"
 #include "CompNavigationSystem.h"
 #include "CompMoveSystem.h"
 #include "CompWeaponSystem.h"
@@ -34,5 +35,6 @@ private:
 	CompNavigationSystem* ptrCompNavigationSystem;
 	CompMoveSystem* ptrCompMoveSystem;
 	CompWeaponSystem* ptrCompWeaponSystem;
+	CompDamageSystem* ptrCompDamageSystem;
 };
 
