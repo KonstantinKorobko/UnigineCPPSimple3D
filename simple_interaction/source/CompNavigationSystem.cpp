@@ -35,13 +35,10 @@ void CompNavigationSystem::removeYField()
 	CompNavigationSystem* ptrLeftVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrLeftYAxis);
 	CompNavigationSystem* ptrRightVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrRightYAxis);
 
-	if (ptrLeftYAxis.get() != nullptr)
+	if ((ptrLeftYAxis.get() != nullptr) && (ptrRightYAxis.get() != nullptr))
 	{
-		ptrLeftVehicleNavSys->ptrRightYAxis = ptrRightYAxis;
-	}
-	if (ptrRightYAxis.get() != nullptr)
-	{
-		ptrRightVehicleNavSys->ptrLeftYAxis = ptrLeftYAxis;
+		ptrLeftVehicleNavSys->ptrRightYAxis = ptrRightYAxis.get();
+		ptrRightVehicleNavSys->ptrLeftYAxis = ptrLeftYAxis.get();
 	}
 }
 
@@ -109,5 +106,5 @@ void CompNavigationSystem::update()
 }
 
 void CompNavigationSystem::shutdown()
-{	
+{
 }
