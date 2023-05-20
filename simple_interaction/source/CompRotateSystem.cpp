@@ -19,10 +19,10 @@ void CompRotateSystem::update()
 		ptrAggregate->rotate(0.0, 0.0, calcTorque());
 
 		//debug
-		Math::vec3 posCurrent = ptrAggregate->getWorldPosition();
+		/*Math::vec3 posCurrent = ptrAggregate->getWorldPosition();
 		Math::vec3 posRotate = posCurrent + rotateVec;
 		posRotate.z = posCurrent.z;
-		Visualizer::renderLine3D(posCurrent, posRotate, Math::vec4(0.5, 0.5, 0.0, 1.0));
+		Visualizer::renderLine3D(posCurrent, posRotate, Math::vec4(0.5, 0.5, 0.0, 1.0));*/
 	}
 }
 

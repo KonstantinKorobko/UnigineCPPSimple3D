@@ -17,11 +17,6 @@ void CompNavigationSystem::addYField(NodePtr ptr_player)
 		ptrRightYAxis = ptrPlayerNavSys->ptrRightYAxis.get();
 		ptrLeftYAxis = ptr_player;
 		ptrPlayerNavSys->ptrRightYAxis = ptrAggregate.get();
-
-		//check list init debug
-		Log::message("left %f\n", ptrPlayerNavSys->ptrRightYAxis->getWorldPosition().y);
-		Log::message("center %f\n", ptrAggregate->getWorldPosition().y);
-		Log::message("right %f\n", ptrRightNavSys->ptrLeftYAxis->getWorldPosition().y);
 	}
 	else
 	{
@@ -90,10 +85,10 @@ void CompNavigationSystem::getClotherTarget()
 void CompNavigationSystem::update()
 {
 	//visualize list of vihicles 
-	if (ptrRightYAxis.get() != nullptr)
+	/*if (ptrRightYAxis.get() != nullptr)
 	{
 		Visualizer::renderLine3D(ptrAggregate->getWorldPosition(), ptrRightYAxis->getWorldPosition(), Math::vec4(0.0, 0.4, 0.5, 0.5));
-	}
+	}*/
 	/*if (ptrLeftYAxis.get() != nullptr)
 	{
 		Visualizer::renderLine3D(ptrAggregate->getWorldPosition(), ptrLeftYAxis->getWorldPosition(), Math::vec4(0.0, 0.0, 1.0, 1.0));
