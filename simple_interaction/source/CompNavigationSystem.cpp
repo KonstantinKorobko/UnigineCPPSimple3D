@@ -13,15 +13,20 @@ void CompNavigationSystem::addYField(NodePtr ptr_player)
 	if (ptrPlayerNavSys->ptrRightYAxis.get() != nullptr)
 	{
 		CompNavigationSystem* ptrRightNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrPlayerNavSys->ptrRightYAxis);
-		ptrRightNavSys->ptrLeftYAxis = ptrAggregate;
-		ptrRightYAxis = ptrPlayerNavSys->ptrRightYAxis;
+		ptrRightNavSys->ptrLeftYAxis = ptrAggregate.get();
+		ptrRightYAxis = ptrPlayerNavSys->ptrRightYAxis.get();
 		ptrLeftYAxis = ptr_player;
-		ptrPlayerNavSys->ptrRightYAxis = ptrAggregate;
+		ptrPlayerNavSys->ptrRightYAxis = ptrAggregate.get();
+
+		//check list init debug
+		Log::message("left %f\n", ptrPlayerNavSys->ptrRightYAxis->getWorldPosition().y);
+		Log::message("center %f\n", ptrAggregate->getWorldPosition().y);
+		Log::message("right %f\n", ptrRightNavSys->ptrLeftYAxis->getWorldPosition().y);
 	}
 	else
 	{
 		ptrLeftYAxis = ptr_player;
-		ptrPlayerNavSys->ptrRightYAxis = ptrAggregate;
+		ptrPlayerNavSys->ptrRightYAxis = ptrAggregate.get();
 	}
 }
 
@@ -30,18 +35,6 @@ void CompNavigationSystem::removeYField()
 	CompNavigationSystem* ptrLeftVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrLeftYAxis);
 	CompNavigationSystem* ptrRightVehicleNavSys = ComponentSystem::get()->getComponentInChildren<CompNavigationSystem>(ptrRightYAxis);
 
-	//to do: last target leave from list
-	/*if ((ptrRightVehicleNavSys->ptrLeftYAxis.get() != nullptr) && (ptrLeftYAxis.get() != nullptr))
-	{
-
-	}
-
-	if (ptrLeftVehicleNavSys->ptrRightYAxis.get().get() != nullptr)
-	{
-
-	}*/
-	
-	
 	if (ptrLeftYAxis.get() != nullptr)
 	{
 		ptrLeftVehicleNavSys->ptrRightYAxis = ptrRightYAxis;
@@ -102,13 +95,17 @@ void CompNavigationSystem::update()
 	//visualize list of vihicles 
 	if (ptrRightYAxis.get() != nullptr)
 	{
-		Visualizer::renderLine3D(ptrAggregate->getWorldPosition(), ptrRightYAxis->getWorldPosition(), Math::vec4(0.0, 1.0, 0.0, 1.0));
+		Visualizer::renderLine3D(ptrAggregate->getWorldPosition(), ptrRightYAxis->getWorldPosition(), Math::vec4(0.0, 0.4, 0.5, 0.5));
 	}
+	/*if (ptrLeftYAxis.get() != nullptr)
+	{
+		Visualizer::renderLine3D(ptrAggregate->getWorldPosition(), ptrLeftYAxis->getWorldPosition(), Math::vec4(0.0, 0.0, 1.0, 1.0));
+	}*/
 	//visualize target
-	if (ptrTarget.get() != nullptr)
+	/*if (ptrTarget.get() != nullptr)
 	{
 		Visualizer::renderLine3D(ptrAggregate->getWorldPosition(), ptrTarget->getWorldPosition(), Math::vec4(1.0, 0.0, 0.0, 1.0));
-	}
+	}*/
 }
 
 void CompNavigationSystem::shutdown()

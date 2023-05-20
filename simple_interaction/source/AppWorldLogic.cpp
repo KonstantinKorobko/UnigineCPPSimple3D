@@ -16,6 +16,7 @@
  */
 
 #include "AppWorldLogic.h"
+#include <UnigineGame.h>
 
  // World logic, it takes effect only when the world is loaded.
  // These methods are called right after corresponding world script's (UnigineScript) methods.
@@ -38,12 +39,13 @@ int AppWorldLogic::init()
 
 	Unigine::ComponentSystem::get()->initialize();
 
+	setMainUI();
+
 	if (objGlobalRadar.getPlayer().get() == NULL)
 	{
 		VehicleFactory::constructVehicle(VehicleFactory::T_VEHICLE_PLAYER, objGlobalRadar);
 	}
-
-	spawnVehicle();
+	
 	// Write here code to be called on world initialization: initialize resources for your world scene during the world start.
 	return 1;
 }
@@ -115,7 +117,7 @@ void AppWorldLogic::spawnVehicle()
 	std::uniform_real_distribution<> spawnRange(-20.0, 20.0);
 	int type = VehicleFactory::T_VEHICLE_LIGHT;
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 1; i++)
 	{
 		float chance = chanceRange(random);		
 		if (chance >= 0.90)
@@ -133,4 +135,48 @@ void AppWorldLogic::spawnVehicle()
 
 		VehicleFactory::constructVehicle(type, objGlobalRadar);
 	}
+}
+
+void AppWorldLogic::setMainUI()
+{
+	WidgetHBoxPtr ptrParrentBox = nullptr;
+	//WidgetButtonPtr ptrAddPlayerButton = nullptr;
+	WidgetButtonPtr ptrAddNpcButton = nullptr;
+	WidgetButtonPtr ptrQuitButton = nullptr;
+
+	GuiPtr ptrGui = Gui::getCurrent();
+
+	ptrParrentBox = WidgetHBox::create(5, 5);
+	ptrGui->addChild(ptrParrentBox, Gui::ALIGN_OVERLAP | Gui::ALIGN_BOTTOM | Gui::ALIGN_LEFT);
+	ptrParrentBox->setPadding(5, 5, 5, 5);
+	ptrParrentBox->setBackground(1);
+	ptrParrentBox->setHeight(30);
+	ptrParrentBox->setWidth(100);
+
+	/*ptrAddPlayerButton = WidgetButton::create("add player");
+	ptrAddPlayerButton->setFontSize(20);
+	ptrParrentBox->addChild(ptrAddPlayerButton, Gui::ALIGN_LEFT);
+	ptrAddPlayerButton->addCallback(Gui::CLICKED, MakeCallback(this, &AppWorldLogic::addPlayerButtonPressed));*/
+
+	ptrAddNpcButton = WidgetButton::create("add npc");
+	ptrAddNpcButton->setFontSize(20);
+	ptrParrentBox->addChild(ptrAddNpcButton, Gui::ALIGN_LEFT);
+	ptrAddNpcButton->addCallback(Gui::CLICKED, MakeCallback(this, &AppWorldLogic::addNpcButtonPressed));
+
+	ptrQuitButton = WidgetButton::create("quit");
+	ptrQuitButton->setFontSize(20);
+	ptrParrentBox->addChild(ptrQuitButton, Gui::ALIGN_LEFT);
+	ptrQuitButton->addCallback(Gui::CLICKED, MakeCallback(this, &AppWorldLogic::quitButtonPressed));
+}
+
+void AppWorldLogic::addPlayerButtonPressed()
+{
+}
+void AppWorldLogic::addNpcButtonPressed()
+{
+	spawnVehicle();
+}
+void AppWorldLogic::quitButtonPressed()
+{
+	Console::run("quit");
 }

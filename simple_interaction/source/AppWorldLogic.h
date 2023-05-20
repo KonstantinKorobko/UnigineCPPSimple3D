@@ -46,6 +46,12 @@ public:
 private:
 	GlobalRadar objGlobalRadar;
 	void spawnVehicle();
+
+	void setMainUI();
+
+	void addPlayerButtonPressed();
+	void addNpcButtonPressed();
+	void quitButtonPressed();
 };
 
 #endif // __APP_WORLD_LOGIC_H__
