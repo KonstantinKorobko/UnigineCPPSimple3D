@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.16.0.2">
+	<guid>ff450bddde3f9b980f806a178c78808aef3e7661</guid>
+	<type>texture</type>
+	<hash>d199a902</hash>
+	<runtimes>
+		<runtime id="ff450bddde3f9b980f806a178c78808aef3e7661" name="albedo.jpg" link="0" type="6"/>
+		<runtime id="d53e9c4c464f2b3b9270a75ee704e7257e646e40" name="albedo.texture" link="1" type="6"/>
+	</runtimes>
+	<parameters>
+		<parameter type="string" name="height">auto</parameter>
+		<parameter type="string" name="image_format">Auto (DXT1 or DXT5)</parameter>
+		<parameter type="string" name="image_type">2d</parameter>
+		<parameter type="bool" name="invert_g">0</parameter>
+		<parameter type="string" name="mipmap_type">box</parameter>
+		<parameter type="string" name="preset_name">albedo (rgba)</parameter>
+		<parameter type="bool" name="srgb_correction">1</parameter>
+		<parameter type="bool" name="unchanged">0</parameter>
+		<parameter type="string" name="width">auto</parameter>
+	</parameters>
+</asset>

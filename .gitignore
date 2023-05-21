@@ -33,7 +33,24 @@
 
 simple_interaction/.thumbnails
 simple_interaction/bin
-simple_interaction/data
+simple_interaction/data/.cache_textures
+simple_interaction/data/.editor2
+simple_interaction/data/.runtimes
+simple_interaction/data/.thumbnails
+simple_interaction/data/ComponentSystem
+simple_interaction/data/configs
+simple_interaction/data/template_assets
+simple_interaction/data/box.mesh
+simple_interaction/data/box.mesh.meta
+simple_interaction/data/core.ung
+simple_interaction/data/editor.cache
+simple_interaction/data/editor2.ung
+simple_interaction/data/guids.db
+simple_interaction/data/root_mount.umount
+simple_interaction/data/scripts.ung
+simple_interaction/data/shader_d3d11.cache
+simple_interaction/data/shader_d3d11_debug.cache
+simple_interaction/data/unigine.cache
 data/configs
 simple_interaction/include
 simple_interaction/lib

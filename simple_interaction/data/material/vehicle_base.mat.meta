@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.16.0.2">
+	<guid>2de1f5c09892ee1fc7cc64f2adaa7fa97475c4f4</guid>
+	<type>material</type>
+	<hash>abd6af5d</hash>
+	<runtimes>
+		<runtime id="2de1f5c09892ee1fc7cc64f2adaa7fa97475c4f4" name="vehicle_base" link="0" type="5"/>
+	</runtimes>
+	<parameters>
+		<parameter type="bool" name="unchanged">1</parameter>
+	</parameters>
+</asset>

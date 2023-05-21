@@ -17,7 +17,7 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 {
 	NodeDummyPtr ptrVehicle = NodeDummy::create();
 	ptrVehicle->setSaveToWorldEnabled(true);
-	ptrVehicle->setShowInEditorEnabled(true);
+	ptrVehicle->setShowInEditorEnabled(true);	
 
 	//Parametrise vehicle. 
 	float armor = 0.0;
@@ -29,6 +29,8 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	float shootRange = 0.0;
 	Math::vec3 sizeHull;
 	Math::vec3 sizeTurret;
+	Math::vec4 hullColor;
+	Math::vec4 turretColor;
 
 	switch (vehicle_type)
 	{
@@ -47,6 +49,8 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 		sizeHull = Math::vec3(0.4, 0.6, 0.2);
 		sizeTurret = Math::vec3(0.1, 0.7, 0.05);
 
+		turretColor = hullColor = Math::vec4(60.0 / 255.0, 195.0 / 255.0, 255.0 / 255.0, 1.0f);
+
 		break;
 	}
 	case T_VEHICLE_LIGHT:
@@ -61,6 +65,8 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 
 		sizeHull = Math::vec3(0.2, 0.3, 0.1);
 		sizeTurret = Math::vec3(0.07, 0.2, 0.04);
+
+		turretColor = hullColor = Math::vec4(255.0 / 255.0, 180.0 / 255.0, 174.0 / 255.0, 1.0f);
 
 		break;
 	}
@@ -77,6 +83,8 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 		sizeHull = Math::vec3(0.3, 0.4, 0.15);
 		sizeTurret = Math::vec3(0.1, 0.35, 0.06);
 
+		turretColor = hullColor = Math::vec4(255.0 / 255.0, 180.0 / 255.0, 174.0 / 255.0, 1.0f);
+
 		break;
 	}
 	case T_VEHICLE_HARD:
@@ -92,15 +100,17 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 		sizeHull = Math::vec3(0.4, 0.5, 0.2);
 		sizeTurret = Math::vec3(0.17, 0.4, 0.08);
 
+		turretColor = hullColor = Math::vec4(255.0 / 255.0, 180.0 / 255.0, 174.0 / 255.0, 1.0f);
+
 		break;
 	}
 	default:
 		break;
 	}
 	//create aggregates
-	NodePtr ptrHull = createHull(sizeHull);
+	NodePtr ptrHull = createHull(sizeHull, hullColor);
 	ptrVehicle->addChild(ptrHull);
-	NodePtr ptrTurret = createTurret(sizeTurret);
+	NodePtr ptrTurret = createTurret(sizeTurret, turretColor);
 	ptrVehicle->addChild(ptrTurret);
 
 	Math::vec3 turretPos = Math::vec3(0.0, 0.0, sizeHull.z * 0.5 + sizeTurret.z * 0.5 + 0.005);
@@ -159,9 +169,14 @@ void VehicleFactory::constructVehicle(int vehicle_type, GlobalRadar& ref_global_
 	}
 }
 
-NodePtr VehicleFactory::createHull(Math::vec3 hull_size)
+NodePtr VehicleFactory::createHull(Math::vec3 hull_size, Math::vec4 hull_color)
 {
 	ObjectMeshDynamicPtr ptrHull = Primitives::createBox(hull_size);
+
+	MaterialPtr ptrBaseMaterial = Materials::loadMaterial("material/vehicle_base.mat");
+	ptrHull->setMaterial(ptrBaseMaterial, 0);
+	ptrHull->setMaterialParameterFloat4("albedo_color", hull_color, 0);
+
 	Primitives::addBoxSurface(ptrHull, hull_size, Math::mat4_identity);
 
 	ptrHull->setSaveToWorldEnabled(true);
@@ -169,7 +184,7 @@ NodePtr VehicleFactory::createHull(Math::vec3 hull_size)
 
 	return ptrHull;
 }
-NodePtr VehicleFactory::createTurret(Math::vec3 turret_size)
+NodePtr VehicleFactory::createTurret(Math::vec3 turret_size, Math::vec4 turret_color)
 {
 	//We need turret with right size, but don't need to move turret coordinate center (pivot).
 	//Pivot should be synchronized with all other vehicle components.
@@ -214,6 +229,10 @@ NodePtr VehicleFactory::createTurret(Math::vec3 turret_size)
 	}
 
 	ptrTurret->setMesh(ptrTurretMesh);
+
+	MaterialPtr ptrBaseMaterial = Materials::loadMaterial("material/vehicle_base.mat");
+	ptrTurret->setMaterial(ptrBaseMaterial, 0);
+	ptrTurret->setMaterialParameterFloat4("albedo_color", turret_color, 0);
 
 	return ptrTurret;
 }

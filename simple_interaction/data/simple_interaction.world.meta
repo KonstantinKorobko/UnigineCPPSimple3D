@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asset version="2.16.0.2">
+	<guid>0000000d000000ae000000da0000000e00000eca</guid>
+	<type>world</type>
+	<hash>90893b33</hash>
+	<runtimes>
+		<runtime id="0000000d000000ae000000da0000000e00000eca" name="simple_interaction.world" link="0"/>
+	</runtimes>
+	<parameters>
+		<parameter type="string" name="physics_settings_path"/>
+		<parameter type="string" name="render_settings_path">guid://92a0ee7917704584f2b913132a497d56e78094bd</parameter>
+		<parameter type="string" name="script_name"/>
+		<parameter type="string" name="sound_settings_path"/>
+		<parameter type="string" name="viewports">&lt;viewport_list&gt;
+&lt;1&gt;
+&lt;flashlight&gt;
+&lt;enabled&gt;0&lt;/enabled&gt;
+&lt;color&gt;1 1 1 1&lt;/color&gt;
+&lt;intensity&gt;1&lt;/intensity&gt;
+&lt;attenuation&gt;1&lt;/attenuation&gt;
+&lt;radius&gt;300&lt;/radius&gt;
+&lt;fov&gt;160&lt;/fov&gt;
+&lt;/flashlight&gt;
+&lt;speed_presets&gt;
+&lt;speed_0&gt;5&lt;/speed_0&gt;
+&lt;speed_1&gt;50&lt;/speed_1&gt;
+&lt;speed_2&gt;500&lt;/speed_2&gt;
+&lt;current_preset&gt;0&lt;/current_preset&gt;
+&lt;/speed_presets&gt;
+&lt;scene_camera&gt;
+&lt;transform&gt;-0.030991613864898682 0.99951958656311035 -3.656743501778692e-05 0 -0.85860878229141235 -0.026603760197758675 0.511940598487854 0 0.51169371604919434 0.015897303819656372 0.85902082920074463 0 0.76479709148406982 0.18878361582756042 1.5987071990966797 1&lt;/transform&gt;
+&lt;fov_mode&gt;0&lt;/fov_mode&gt;
+&lt;fov&gt;60&lt;/fov&gt;
+&lt;focal_length&gt;30&lt;/focal_length&gt;
+&lt;film_gate&gt;35&lt;/film_gate&gt;
+&lt;znear&gt;0.100000001&lt;/znear&gt;
+&lt;zfar&gt;100000&lt;/zfar&gt;
+&lt;viewport_mask&gt;-1&lt;/viewport_mask&gt;
+&lt;reflection_mask&gt;-1&lt;/reflection_mask&gt;
+&lt;source_mask&gt;-1&lt;/source_mask&gt;
+&lt;reverb_mask&gt;-1&lt;/reverb_mask&gt;
+&lt;ortho_enabled&gt;0&lt;/ortho_enabled&gt;
+&lt;ortho_height&gt;16&lt;/ortho_height&gt;
+&lt;projection&gt;1.7320509 0 0 0 0 1.7320509 0 0 0 0 -1.00000203 -1 0 0 -0.200000197 0&lt;/projection&gt;
+&lt;/scene_camera&gt;
+&lt;render_debug&gt;
+&lt;mode&gt;-1&lt;/mode&gt;
+&lt;ligth_meter_max_intensity&gt;500&lt;/ligth_meter_max_intensity&gt;
+&lt;/render_debug&gt;
+&lt;selected_camera_id&gt;-1&lt;/selected_camera_id&gt;
+&lt;/1&gt;
+&lt;/viewport_list&gt;
+</parameter>
+	</parameters>
+</asset>

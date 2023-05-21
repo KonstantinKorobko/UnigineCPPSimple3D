@@ -40,6 +40,6 @@ public:
 
 	static void constructVehicle(int vehicle_type, GlobalRadar& ref_radar);
 private:
-	static NodePtr createHull(Math::vec3 hull_size);
-	static NodePtr createTurret(Math::vec3 turret_size);
+	static NodePtr createHull(Math::vec3 hull_size, Math::vec4 hull_color);
+	static NodePtr createTurret(Math::vec3 turret_size, Math::vec4 turret_color);
 };
