@@ -17,21 +17,31 @@ void CompWeaponSystem::update()
 {
 	if (ptrTarget.get() != nullptr)
 	{
+		if (t_LockTarget > 0.0)
+		{
+			t_LockTarget = t_LockTarget - Game::getIFps();
+		}
+
 		calcData();
 
 		ptrCompRotateSystem->rotateVec = Math::vec3(calcBuffer[0], calcBuffer[1], calcBuffer[2]);
 
-		if ((ptrCompRotateSystem->difference > -0.05) && (ptrCompRotateSystem->difference < 0.05) && (t_Reload <= 0.0) && (ptrCompMoveSystem->distance <= range))
+		if ((ptrCompRotateSystem->difference > -0.05) && (ptrCompRotateSystem->difference < 0.05) && (t_Reload <= 0.0) && (t_LockTarget <= 0.0) && (ptrCompMoveSystem->distance <= range))
 		{
 			shoot();
 
 			t_Reload = 1.5;
 		}
 	}
+	else
+	{
+		t_LockTarget = 0.2;
+	}
+
 	if (t_Reload > 0.0)
 	{
 		t_Reload = t_Reload - Game::getIFps();
-	}
+	}	
 }
 
 void CompWeaponSystem::shutdown()

@@ -23,6 +23,7 @@ public:
 	PROP_PARAM(Node, ptrTarget);
 	PROP_PARAM(Float, power, 0.0);
 	PROP_PARAM(Float, range, 0.0);
+	PROP_PARAM(Float, t_LockTarget, 0.2);
 	PROP_PARAM(Float, t_Reload, 0.0);
 
 	//PROP_PARAM(Int, numAmmo, 0);//?

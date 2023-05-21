@@ -23,7 +23,7 @@ public:
 	PROP_PARAM(Node, ptrHull);
 	PROP_PARAM(Node, ptrTurret);
 	PROP_PARAM(Int, vehicleType, 0);
-	PROP_PARAM(Float, t5, 0);
+	PROP_PARAM(Float, t1, 0);
 	PROP_PARAM(Float, t0_5, 0);
 
 protected:

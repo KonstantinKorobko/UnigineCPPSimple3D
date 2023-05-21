@@ -19,11 +19,11 @@ void CompControlSystemPlayer::update()
 	{
 		t0_5 = 0.5;
 
-		t5 = t5 - t0_5;
+		t1 = t1 - t0_5;
 
-		if (t5 <= 0.0)
+		if (t1 <= 0.0)
 		{
-			t5 = 5.0;
+			t1 = 1.0;
 			ptrCompNavigationSystem->getClotherTarget();
 		}
 
