@@ -33,11 +33,10 @@ void CompControlSystemMissile::update()
 			if (collision.z <= 0.04)
 			{
 				CompDamageSystem* ptrCompDamageSystem = ComponentSystem::get()->getComponent<CompDamageSystem>(ptrTarget);
-				ptrCompDamageSystem->damageAdd = ptrCompDamageSystem->damageAdd + damage;
-
-				ptrAggregate->deleteLater();
+				ptrCompDamageSystem->damageAdd = ptrCompDamageSystem->damageAdd + damage;				
 			}
 		}
+		ptrAggregate->deleteLater();
 	}
 }
 
