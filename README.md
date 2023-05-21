@@ -9,3 +9,10 @@ Using technology:
 Using resources:
 
 Vehicle texture <a href="http://www.freepik.com">Designed by Dotstudio / Freepik</a>
+
+
+---------------------------------------
+
+Current version video:
+
+https://youtu.be/lZVAb4r0WVo
