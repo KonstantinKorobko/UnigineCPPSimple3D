@@ -63,6 +63,9 @@ void CompWeaponSystem::calcData()
 void CompWeaponSystem::shoot(int missile_type)
 {
 	ObjectMeshDynamicPtr ptrMissile = Primitives::createSphere(0.1);
+
+	ptrMissile->setMaterialParameterFloat4("albedo_color", Math::vec4(255.0 / 255.0, 0.0 / 255.0, 0.0 / 255.0, 1.0f), 0);
+
 	Primitives::addSphereSurface(ptrMissile, 0.1, Math::mat4_identity);
 
 	//only for debug

@@ -37,7 +37,6 @@ void CompControlSystemMissile::update()
 
 				ptrAggregate->deleteLater();
 			}
-			//calcBuffer[2] = sqrtf(calcBuffer[0] * calcBuffer[0] + calcBuffer[1] * calcBuffer[1]);
 		}
 	}
 }
