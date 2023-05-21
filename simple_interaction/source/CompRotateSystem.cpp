@@ -16,7 +16,7 @@ void CompRotateSystem::update()
 	if (rotateVec.get().z != 0.0)
 	{
 		//at this time i don't go to calculate with quaternions
-		ptrAggregate->rotate(0.0, 0.0, calcTorque());
+		ptrAggregate->rotate(0.0, 0.0, calcTorque() * Game::getIFps() * 100);
 
 		//debug
 		/*Math::vec3 posCurrent = ptrAggregate->getWorldPosition();

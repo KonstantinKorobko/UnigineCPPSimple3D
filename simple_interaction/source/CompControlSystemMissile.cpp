@@ -21,7 +21,7 @@ void CompControlSystemMissile::update()
 		ptrAggregate->deleteLater();
 	}
 
-	if (ptrCompMoveSystem->distance - ptrCompMoveSystem->speed <= 0.0)
+	if (ptrCompMoveSystem->distance - ptrCompMoveSystem->speed * Game::getIFps() * 100 <= 0.2)
 	{
 		if (ptrTarget.get() != nullptr)
 		{
@@ -30,7 +30,7 @@ void CompControlSystemMissile::update()
 			collision.y = collision.y - ptrAggregate->getWorldPosition().y;
 			collision.z = collision.x * collision.x + collision.y * collision.y;
 
-			if (collision.z <= 0.04)
+			if (collision.z <= 0.4)
 			{
 				CompDamageSystem* ptrCompDamageSystem = ComponentSystem::get()->getComponent<CompDamageSystem>(ptrTarget);
 				ptrCompDamageSystem->damageAdd = ptrCompDamageSystem->damageAdd + damage;				

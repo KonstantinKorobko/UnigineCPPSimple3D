@@ -30,9 +30,9 @@ void CompMoveSystem::update()
 		ptrCompRotateSystem->rotateVec = Math::vec3(calcBuffer[0], calcBuffer[1], calcBuffer[2]);
 	}
 
-	if ((abs(calcBuffer[2]) - tolerance - speed) > 0.0)
+	if ((abs(calcBuffer[2]) - tolerance - speed * Game::getIFps() * 100) > 0.0)
 	{
-		ptrAggregate->translate(Math::vec3(0.0, speed, 0.0));
+		ptrAggregate->translate(Math::vec3(0.0, speed * Game::getIFps() * 100, 0.0));
 	}
 }
 
