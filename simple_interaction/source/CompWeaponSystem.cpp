@@ -65,6 +65,7 @@ void CompWeaponSystem::shoot(int missile_type)
 
 	CompMoveSystem* ptrCompMoveSystem = ComponentSystem::get()->addComponent<CompMoveSystem>(ptrMissile);
 	ptrCompMoveSystem->ptrAggregate = ptrMissile;
+	ptrCompMoveSystem->setpoint = ptrTarget->getWorldPosition();
 
 	CompControlSystemMissile* ptrCompControlSystemMissile = ComponentSystem::get()->addComponent<CompControlSystemMissile>(ptrMissile);
 	ptrCompControlSystemMissile->ptrAggregate = ptrMissile;

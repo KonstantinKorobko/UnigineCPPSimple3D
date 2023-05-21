@@ -10,8 +10,7 @@ void CompControlSystemMissile::init()
 {
 	ptrCompMoveSystem = ComponentSystem::get()->getComponent<CompMoveSystem>(ptrAggregate);
 	ptrCompMoveSystem->speed = 0.08;
-	ptrCompMoveSystem->tolerance = 0.0;
-	ptrCompMoveSystem->setpoint = ptrTarget->getWorldPosition();
+	ptrCompMoveSystem->tolerance = 0.0;	
 }
 
 void CompControlSystemMissile::update()
@@ -31,7 +30,7 @@ void CompControlSystemMissile::update()
 			collision.y = collision.y - ptrAggregate->getWorldPosition().y;
 			collision.z = collision.x * collision.x + collision.y * collision.y;
 
-			if (collision.z <= 0.6)
+			if (collision.z <= 0.8)
 			{
 				CompDamageSystem* ptrCompDamageSystem = ComponentSystem::get()->getComponent<CompDamageSystem>(ptrTarget);
 				ptrCompDamageSystem->damageAdd = ptrCompDamageSystem->damageAdd + damage;
