@@ -55,8 +55,9 @@ void CompWeaponSystem::shoot(int missile_type)
 	ObjectMeshDynamicPtr ptrMissile = Primitives::createSphere(0.1);
 	Primitives::addSphereSurface(ptrMissile, 0.1, Math::mat4_identity);
 
-	ptrMissile->setSaveToWorldEnabled(true);
-	ptrMissile->setShowInEditorEnabled(true);
+	//only for debug
+	//ptrMissile->setSaveToWorldEnabled(true);
+	//ptrMissile->setShowInEditorEnabled(true);
 
 	//in future init position with turret geometry
 	ptrMissile->setWorldPosition(ptrAggregate->getWorldPosition());
