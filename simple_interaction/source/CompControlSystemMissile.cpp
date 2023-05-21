@@ -30,7 +30,7 @@ void CompControlSystemMissile::update()
 			collision.y = collision.y - ptrAggregate->getWorldPosition().y;
 			collision.z = collision.x * collision.x + collision.y * collision.y;
 
-			if (collision.z <= 0.8)
+			if (collision.z <= 0.04)
 			{
 				CompDamageSystem* ptrCompDamageSystem = ComponentSystem::get()->getComponent<CompDamageSystem>(ptrTarget);
 				ptrCompDamageSystem->damageAdd = ptrCompDamageSystem->damageAdd + damage;
