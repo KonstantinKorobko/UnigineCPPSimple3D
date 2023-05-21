@@ -15,19 +15,43 @@ void CompControlSystemAI::init()
 
 void CompControlSystemAI::update()
 {
-	t15 = t15 - Game::getIFps();
-	if (t15 <= 0.0)
-	{
-		t15 = 4.0;
+	t0_5 = t0_5 - Game::getIFps();
 
-		ptrCompMoveSystem->setpoint = ptrCompNavigationSystem->getPatrolPoint(10);
-		ptrCompMoveSystem->tolerance = 0.0;
-	}
-	if (ptrCompDamageSystem->armor < 0.0)
+	if (t0_5 <= 0.0)
 	{
-		ptrCompNavigationSystem->removeYField();
+		t0_5 = 0.5;
 
-		ptrAggregate->deleteLater();
+		t5 = t5 - t0_5;
+
+		if (ptrCompWeaponSystem->ptrTarget.get() == nullptr)
+		{
+			Math::vec3 distance = ptrCompNavigationSystem->ptrTarget->getWorldPosition();
+			distance.x = distance.x - ptrAggregate->getWorldPosition().x;
+			distance.y = distance.y - ptrAggregate->getWorldPosition().y;
+			distance.z = distance.x * distance.x + distance.y * distance.y;
+
+			if (distance.z <= (ptrCompNavigationSystem->radarRadius * ptrCompNavigationSystem->radarRadius))
+			{
+				ptrCompMoveSystem->setpoint = ptrCompNavigationSystem->ptrTarget->getWorldPosition();
+				ptrCompMoveSystem->tolerance = ptrCompWeaponSystem->range - 1.0;
+				ptrCompWeaponSystem->ptrTarget = ptrCompNavigationSystem->ptrTarget;
+			}
+		}
+
+		if ((t5 <= 0.0) && (ptrCompWeaponSystem->ptrTarget.get() == nullptr))
+		{
+			t5 = 5.0;
+
+			ptrCompMoveSystem->setpoint = ptrCompNavigationSystem->getPatrolPoint(10);
+			ptrCompMoveSystem->tolerance = 0.0;
+		}
+
+		if (ptrCompDamageSystem->armor < 0.0)
+		{
+			ptrCompNavigationSystem->removeYField();
+
+			ptrAggregate->deleteLater();
+		}
 	}
 }
 
