@@ -29,6 +29,8 @@ AppWorldLogic::~AppWorldLogic()
 
 int AppWorldLogic::init()
 {
+	seedLast = 0;
+
 	Visualizer::setEnabled(true);
 
 	Unigine::Console::setOnscreen(true);
@@ -45,7 +47,7 @@ int AppWorldLogic::init()
 	{
 		VehicleFactory::constructVehicle(VehicleFactory::T_VEHICLE_PLAYER, objGlobalRadar);
 	}
-	
+
 	// Write here code to be called on world initialization: initialize resources for your world scene during the world start.
 	return 1;
 }
@@ -111,6 +113,13 @@ void AppWorldLogic::spawnVehicle()
 {
 	Math::Random rand;
 	unsigned int seed = rand.getSeed();
+
+	if (seed == seedLast)
+	{
+		seed++;
+		seedLast = seed;
+	}
+
 	std::mt19937 random;
 	random.seed(seed);
 	std::uniform_real_distribution<> chanceRange(0.0, 1.0);
@@ -119,7 +128,7 @@ void AppWorldLogic::spawnVehicle()
 
 	for (int i = 0; i < 1; i++)
 	{
-		float chance = chanceRange(random);		
+		float chance = chanceRange(random);
 		if (chance >= 0.90)
 		{
 			type = VehicleFactory::T_VEHICLE_HARD;

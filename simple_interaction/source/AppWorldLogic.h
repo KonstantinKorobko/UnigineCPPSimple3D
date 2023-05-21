@@ -45,6 +45,7 @@ public:
 
 private:
 	GlobalRadar objGlobalRadar;
+	unsigned int seedLast;
 	void spawnVehicle();
 
 	void setMainUI();
